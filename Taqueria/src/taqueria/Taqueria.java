@@ -15,6 +15,11 @@ public class Taqueria {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        LoginTaqueria loginTaqueria = new LoginTaqueria();
+        loginTaqueria.run();
+        Usuario usuario = new Usuario();
+        System.out.println("hello");
+        
     }
     
 }
