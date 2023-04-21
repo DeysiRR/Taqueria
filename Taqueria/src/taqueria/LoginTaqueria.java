@@ -4,7 +4,10 @@
  */
 package taqueria;
 
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -17,11 +20,15 @@ public class LoginTaqueria extends javax.swing.JFrame {
      */
     private OpcionesMenu opcionesMenu;
     private RegistrarUser registrarUsuario;
-    private Usuario usuario;
-    
+    private ArrayList<Usuario> usuarios = null;
     
     public LoginTaqueria() {
         initComponents();
+        String pass = "123";
+        usuarios = new ArrayList<>();
+        usuarios.add(new Usuario("admin", pass.toCharArray(), 1));
+        usuarios.add(new Usuario("cajero", pass.toCharArray(), 2));
+        usuarios.add(new Usuario("empleado", pass.toCharArray(), 3));
     }
 
     /**
@@ -39,11 +46,10 @@ public class LoginTaqueria extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Taqueria la");
+        setTitle("Taqueria La Glorieta");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(64, 33, 20));
@@ -77,13 +83,6 @@ public class LoginTaqueria extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Registrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -95,13 +94,12 @@ public class LoginTaqueria extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)))))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(jButton1)))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,13 +109,11 @@ public class LoginTaqueria extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jButton1)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -153,12 +149,12 @@ public class LoginTaqueria extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -166,27 +162,42 @@ public class LoginTaqueria extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        System.out.println("IN HERE");
+        String texto = jTextField1.getText();
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getUsuario().compareTo(texto) == 0){
+                System.out.println(usuarios.get(i).getUsuario());
+                usuarios.get(i).setUserLoggedIn(true);
+            }
+                
+        }
+        //System.out.println(""+usuarios.get(0).getUsuario()+": " + usuarios.get(0).getUserLoggedIn());
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
+        for(int i = 0; i < usuarios.size(); i++){
+            if(Arrays.equals(jPasswordField1.getPassword(), usuarios.get(i).getPassword())){
+                usuarios.get(i).setPasswordLoggedIn(true);
+                System.out.println(""+usuarios.get(0).getUsuario()+": " + usuarios.get(0).getPasswordLoggedIn());
+            }
+        }
+        
+       
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        System.out.println("enter");
-        opcionesMenu = new OpcionesMenu();
-        opcionesMenu.setVisible(true);
-        this.dispose();
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getUserLoggedIn() == true && usuarios.get(i).getPasswordLoggedIn() == true){
+                System.out.println("enter");
+                opcionesMenu = new OpcionesMenu();
+                opcionesMenu.setLoginTaqueria(this);
+                opcionesMenu.setUsuarioLogged(usuarios.get(i));
+                opcionesMenu.setVisible(true);
+                this.setVisible(false);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        registrarUsuario = new RegistrarUser();
-        registrarUsuario.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,20 +235,11 @@ public class LoginTaqueria extends javax.swing.JFrame {
     }
     
     public void run(){
-        new LoginTaqueria().setVisible(true);
-    }
-    
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
-    }
-    
-    public Usuario getUsuario(){
-        return usuario;
+        setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

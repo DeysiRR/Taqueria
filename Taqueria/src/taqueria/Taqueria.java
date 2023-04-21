@@ -17,9 +17,5 @@ public class Taqueria {
         // TODO code application logic here
         LoginTaqueria loginTaqueria = new LoginTaqueria();
         loginTaqueria.run();
-        Usuario usuario = new Usuario();
-        System.out.println("hello");
-        
     }
-    
 }
