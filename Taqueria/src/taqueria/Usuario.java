@@ -11,10 +11,12 @@ package taqueria;
 public class Usuario {
     private String usuario;
     private String password;
-    boolean isAdmin;
+    private boolean isAdmin;
+    private String userType;
     
     public Usuario(){
         this.isAdmin = true;
+        this.userType = "";
     }
     
     public String getUsuario(){
@@ -29,6 +31,10 @@ public class Usuario {
         return isAdmin;
     }
     
+    public String getUserType(){
+        return userType;
+    }
+    
     public void setUsuario(String usuario){
         this.usuario = usuario;
     }
@@ -39,5 +45,9 @@ public class Usuario {
     
     public void setIsAdmin(boolean b){
         this.isAdmin = b;
+    }
+    
+    public void setUserType(String s){
+        this.userType = s;
     }
 }
