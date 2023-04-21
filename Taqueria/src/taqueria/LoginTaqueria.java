@@ -191,6 +191,8 @@ public class LoginTaqueria extends javax.swing.JFrame {
             if(usuarios.get(i).getUserLoggedIn() == true && usuarios.get(i).getPasswordLoggedIn() == true){
                 System.out.println("enter");
                 opcionesMenu = new OpcionesMenu();
+                opcionesMenu.setLoginTaqueria(this);
+                opcionesMenu.setUsuarioLogged(usuarios.get(i));
                 opcionesMenu.setVisible(true);
                 this.setVisible(false);
             }

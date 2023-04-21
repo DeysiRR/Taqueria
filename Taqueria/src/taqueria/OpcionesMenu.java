@@ -14,9 +14,16 @@ public class OpcionesMenu extends javax.swing.JFrame {
      * Creates new form OpcionesMenu
      */
     private LoginTaqueria loginTaqueria;
+    private Inventario inv;
+    private Usuario usuarioLogged;
     
     public OpcionesMenu() {
         initComponents();
+        /*
+        if(usuarioLogged.getUserType() == "admin"){
+            jLabel3.setVisible(false);
+        }
+        */
     }
 
     /**
@@ -189,7 +196,11 @@ public class OpcionesMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        System.out.println("going to inventario");
+        inv = new Inventario();
+        inv.setOpcionesMenu(this);
+        inv.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -202,15 +213,21 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        loginTaqueria = new LoginTaqueria();
         loginTaqueria.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    public void setLoginTaqueria(LoginTaqueria loginTaqueria){
+        this.loginTaqueria = loginTaqueria;
+    }
+    
+    public void setUsuarioLogged(Usuario usuario){
+        usuarioLogged = usuario;
+    }
     /**
      * @param args the command line arguments
      */

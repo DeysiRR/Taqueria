@@ -10,12 +10,12 @@ import java.awt.Dimension;
  *
  * @author 1
  */
-public class Login extends javax.swing.JPanel {
+public class Colores extends javax.swing.JPanel {
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Colores() {
         initComponents();
         
          //Línea 1
