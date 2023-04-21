@@ -4,7 +4,10 @@
  */
 package taqueria;
 
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -17,13 +20,15 @@ public class LoginTaqueria extends javax.swing.JFrame {
      */
     private OpcionesMenu opcionesMenu;
     private RegistrarUser registrarUsuario;
-    private Usuario usuario;
-    private boolean userLogIn = false;
-    private boolean passwordLogIn = false;
-    
+    private ArrayList<Usuario> usuarios = null;
     
     public LoginTaqueria() {
         initComponents();
+        String pass = "123";
+        usuarios = new ArrayList<>();
+        usuarios.add(new Usuario("admin", pass.toCharArray(), 1));
+        usuarios.add(new Usuario("cajero", pass.toCharArray(), 2));
+        usuarios.add(new Usuario("empleado", pass.toCharArray(), 3));
     }
 
     /**
@@ -158,29 +163,38 @@ public class LoginTaqueria extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         String texto = jTextField1.getText();
-        if(usuario.getUsuario().compareTo(texto) == 0){
-            userLogIn = true;
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getUsuario().compareTo(texto) == 0){
+                System.out.println(usuarios.get(i).getUsuario());
+                usuarios.get(i).setUserLoggedIn(true);
+            }
+                
         }
-        System.out.println("IN HERE");
+        //System.out.println(""+usuarios.get(0).getUsuario()+": " + usuarios.get(0).getUserLoggedIn());
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
-        String texto = jPasswordField1.getText();
-        if(usuario.getPassword().compareTo(texto) == 0){
-            passwordLogIn = true;
+        for(int i = 0; i < usuarios.size(); i++){
+            if(Arrays.equals(jPasswordField1.getPassword(), usuarios.get(i).getPassword())){
+                usuarios.get(i).setPasswordLoggedIn(true);
+                System.out.println(""+usuarios.get(0).getUsuario()+": " + usuarios.get(0).getPasswordLoggedIn());
+            }
         }
+        
+       
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(userLogIn == true && passwordLogIn == true){
-            System.out.println("enter");
-            opcionesMenu = new OpcionesMenu();
-            opcionesMenu.setVisible(true);
-            this.dispose();
+        for(int i = 0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getUserLoggedIn() == true && usuarios.get(i).getPasswordLoggedIn() == true){
+                System.out.println("enter");
+                opcionesMenu = new OpcionesMenu();
+                opcionesMenu.setVisible(true);
+                this.setVisible(false);
+            }
         }
-            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -220,14 +234,6 @@ public class LoginTaqueria extends javax.swing.JFrame {
     
     public void run(){
         setVisible(true);
-    }
-    
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
-    }
-    
-    public Usuario getUsuario(){
-        return usuario;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

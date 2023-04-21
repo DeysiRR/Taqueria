@@ -17,13 +17,5 @@ public class Taqueria {
         // TODO code application logic here
         LoginTaqueria loginTaqueria = new LoginTaqueria();
         loginTaqueria.run();
-        Usuario usuario = new Usuario();
-        usuario.setIsAdmin(true);
-        usuario.setUsuario("admin");
-        usuario.setPassword("123");
-        loginTaqueria.setUsuario(usuario);
-        System.out.println("hello");
-        
     }
-    
 }

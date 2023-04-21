@@ -84,7 +84,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Gestion usuarios");
+        jLabel4.setText("Gestionar usuarios");
 
         jButton4.setText("Regresar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
