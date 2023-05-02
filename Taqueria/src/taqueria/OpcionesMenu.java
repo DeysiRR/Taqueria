@@ -15,7 +15,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
      */
     private LoginTaqueria loginTaqueria;
     private Inventario inv;
-    private Usuario usuarioLogged;
+    //private Usuario usuarioLogged;
     
     public OpcionesMenu() {
         initComponents();
@@ -225,9 +225,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
         this.loginTaqueria = loginTaqueria;
     }
     
-    public void setUsuarioLogged(Usuario usuario){
-        usuarioLogged = usuario;
-    }
+   // public void setUsuarioLogged(Usuario usuario){
+        //usuarioLogged = usuario;
+  //  }
     /**
      * @param args the command line arguments
      */

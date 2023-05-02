@@ -5,6 +5,7 @@
 package taqueria;
 
 import Controlador.Ctrl_Usuario;
+import Modelo.Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -26,11 +27,7 @@ public class LoginTaqueria extends javax.swing.JFrame {
         this.setSize(700, 500);
         
 
-        String pass = "123";
-        usuarios = new ArrayList<>();
-        usuarios.add(new Usuario("admin", pass.toCharArray(), 1));
-        usuarios.add(new Usuario("cajero", pass.toCharArray(), 2));
-        usuarios.add(new Usuario("empleado", pass.toCharArray(), 3));
+      
     }
  
     /**
