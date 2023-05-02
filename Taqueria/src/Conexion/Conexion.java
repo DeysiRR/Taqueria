@@ -1,17 +1,22 @@
 package Conexion;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    //conexion local
-    public static Connection conectar(){
-        try{//falta verificar la contrasena de la bd
-            Connection cn=DriverManager.getConnection("jdbc:mysql://localhost//Taqueria_La_Glorieta", "root","Jk010997");
-            return cn;
-        }catch(SQLException e){
-            System.out.println("Error en la conexion local " + e);
+
+    // Conexión local
+    public static Connection conectar() {
+        Connection cn = null;
+        try {
+            String url = "jdbc:mysql://localhost:3306/taqueria_la_glorieta";
+            String user = "root";
+            String password = "Jk01091997";
+            cn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            System.out.println("Error en la conexión local: " + e.getMessage());
         }
-        return null;
+        return cn;
     }
 }
