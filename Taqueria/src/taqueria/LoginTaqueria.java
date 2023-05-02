@@ -17,14 +17,14 @@ public class LoginTaqueria extends javax.swing.JFrame {
 /**
      * Creates new form LoginTaqueria
      */
-        private ArrayList<Usuario> usuarios = null;
+       // private ArrayList<Usuario> usuarios = null;
 
     public LoginTaqueria() {
-        initComponents();
-        this.setResizable(false);
+        initComponents();this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setTitle("Login -- TAQUERIA LA GLORIETA");
+        this.setTitle("TAQUERIA LA GLORIETA");
         this.setSize(700, 500);
+        
         
 
       
@@ -286,6 +286,9 @@ public class LoginTaqueria extends javax.swing.JFrame {
 
             if(controlUsuario.LoginTaqueria(usuario)){
                 JOptionPane.showMessageDialog(null, "Bienvenido");
+                OpcionesMenu menu = new OpcionesMenu();
+                menu .setVisible(true);
+                this.dispose();
 
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
