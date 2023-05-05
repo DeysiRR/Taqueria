@@ -21,10 +21,10 @@ public class OpcionesMenu extends javax.swing.JFrame {
        // this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setTitle("TAQUERIA LA GLORIETA");
+        
         this.setLayout(null);
         jDesktopPane_menu= new JDesktopPane();
-        this.setLayout(null);
-        jDesktopPane_menu= new JDesktopPane();
+        
         int ancho=java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
         this.jDesktopPane_menu.setBounds(0,0,ancho,(alto-110));
@@ -68,7 +68,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(64, 33, 20));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(210, 80));
