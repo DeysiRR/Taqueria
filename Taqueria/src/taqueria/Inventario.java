@@ -1,7 +1,7 @@
 
 package taqueria;
 
-import Controlador.ctrl_Inventario;
+import Controlador.Ctrl_Inventario;
 import Modelo.MInventario;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -78,7 +78,7 @@ public class Inventario extends javax.swing.JInternalFrame {
 
     private void buttonGuardarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarPActionPerformed
         MInventario inventario= new MInventario();
-        ctrl_Inventario controlInventario = new ctrl_Inventario();
+        Ctrl_Inventario controlInventario = new Ctrl_Inventario();
         
         //validar si se ingresan espacios vacios
         if(txtDescP.getText().isEmpty() || txtCantidad.getText().isEmpty() || txtNombreP2.getText().isEmpty() || txtProveedor.getText().isEmpty()){

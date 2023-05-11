@@ -44,7 +44,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JMenuBar();
         menuInv = new javax.swing.JMenu();
         menuIProducto = new javax.swing.JMenuItem();
@@ -67,13 +66,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new java.awt.Color(51, 51, 0));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(210, 80));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
 
         menu.setBackground(new java.awt.Color(211, 207, 195));
         menu.setForeground(new java.awt.Color(108, 76, 60));
@@ -303,7 +295,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem menuCerrarSesiion;
     private javax.swing.JMenuItem menuEProducto;
