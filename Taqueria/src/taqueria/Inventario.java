@@ -29,6 +29,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -73,6 +74,9 @@ public class Inventario extends javax.swing.JInternalFrame {
         jLabel6.setText("Descripcion");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(211, 207, 195));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 260));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,6 +119,7 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescP;
     private javax.swing.JTextField txtNombreP2;
