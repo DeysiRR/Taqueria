@@ -4,6 +4,13 @@
  */
 package taqueria;
 
+import Controlador.Ctrl_ArticuloMenu;
+import Controlador.Ctrl_Empleados;
+import Controlador.Ctrl_Ventas;
+import Modelo.Empleado;
+import Modelo.Venta;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -13,8 +20,41 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
     /**
      * Creates new form AgregarVenta
      */
+    private Ctrl_Ventas ctrlVentas;
+    private Ctrl_ArticuloMenu ctrlArticuloMenu;
+    private Ctrl_Empleados ctrlEmpleados;
+    private Venta ventaElegida;
+    private int itemID;
+    private int id_empleado;
+    
+    private String nombre_articulo;
+    private String nombre_empleado;
+    private int claveArticulo;
     public AgregarVenta() {
+        ventaElegida = new Venta();
         initComponents();
+        jComboBox1.removeAllItems();
+        jComboBox2.removeAllItems();
+        
+        ctrlVentas = new Ctrl_Ventas();
+        
+        
+        //ctrlVentas.setPrecioUnitarioTextField(jTextField1);
+        
+        ctrlArticuloMenu = new Ctrl_ArticuloMenu();
+        ctrlArticuloMenu.setComboBox(jComboBox1);
+        ctrlArticuloMenu.setTextField(jTextField1);
+        ctrlArticuloMenu.getArticulos();
+        
+        ctrlEmpleados = new Ctrl_Empleados();
+        ctrlEmpleados.setComboBoxEmpleados(jComboBox2);
+        ctrlEmpleados.getEmpleadosComboBox();
+        
+        nombre_articulo = "";
+        claveArticulo = 0;
+        itemID = 0;
+        id_empleado = 0;
+        nombre_empleado = "";
     }
 
     /**
@@ -31,11 +71,13 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jSpinner2 = new javax.swing.JSpinner();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,26 +134,21 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Empleado:");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addGap(60, 60, 60))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -120,6 +157,27 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
                 .addGap(130, 130, 130)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(60, 60, 60))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSpinner2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,11 +194,15 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(15, 15, 15))
         );
@@ -150,10 +212,36 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String aux = jSpinner2.getValue().toString();
+        ventaElegida.setCantidad(Integer.parseInt(aux));
+        ctrlVentas = new Ctrl_Ventas();
         
+        System.out.println("itemid " + ventaElegida.getItemID());
+        System.out.println("idempleado " + ventaElegida.getIdEmpleado());
+        System.out.println("cantidad " + ventaElegida.getCantidad());
+        if(ventaElegida.getItemID() != 0 && ventaElegida.getIdEmpleado() != 0 && ventaElegida.getCantidad() >= 0){
+            ctrlVentas.guardar(ventaElegida);
+        }else{
+            JOptionPane.showMessageDialog(null, "Los valores que ingresó no son válidos, intente de nuevo.");
+        }
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        nombre_articulo = String.valueOf(jComboBox1.getSelectedItem());
+        System.out.println(nombre_articulo);
+        
+        //Mostrar precio unitario en text field
+        ctrlVentas = new Ctrl_Ventas();
+        ctrlVentas.setPrecioUnitarioTextField(jTextField1);
+        ctrlVentas.getPrecioUnitario(nombre_articulo);
+        
+        
+        itemID = ctrlVentas.getItemID(nombre_articulo);
+        ventaElegida.setItemID(itemID);
+        System.out.println(itemID);
+        
+        
         
         //ctrlArticuloMenu = new Ctrl_ArticuloMenu();
         //ctrlArticuloMenu.getPrecioUnitario(jTextField1, nombre_articulo);
@@ -164,16 +252,42 @@ public class AgregarVenta extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        nombre_empleado = String.valueOf(jComboBox2.getSelectedItem());
+        System.out.println(nombre_empleado);
+        ctrlVentas = new Ctrl_Ventas();
+        
+        int idx = nombre_empleado.lastIndexOf(' ');
+        //System.out.println(idx);
+       
+        String nombre = nombre_empleado.substring(0,idx+1);
+        nombre = nombre.trim();
+        System.out.println(nombre+"s");
+        
+        String apellido = nombre_empleado.substring(idx+1,nombre_empleado.length());
+        apellido.trim();
+        System.out.println(apellido+"e");
+        
+        Empleado empleado = new Empleado(nombre, apellido);
+        id_empleado = ctrlVentas.getIDEmpleado(empleado);
+        System.out.println("IDEMPLEADO: " + id_empleado);
+        
+        ventaElegida.setIdEmpleado(id_empleado);
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

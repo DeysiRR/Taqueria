@@ -320,6 +320,10 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        AgregarVenta agregarVenta = new AgregarVenta();
+        jDesktopPane_menu.add(agregarVenta);
+        agregarVenta.setVisible(true);
+        agregarVenta.moveToFront();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     public void setLoginTaqueria(LoginTaqueria loginTaqueria){
