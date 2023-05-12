@@ -32,6 +32,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
         
         
         
+        
+        
+        
        
     }
 
@@ -44,7 +47,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         menu = new javax.swing.JMenuBar();
         menuInv = new javax.swing.JMenu();
         menuIProducto = new javax.swing.JMenuItem();
@@ -52,6 +54,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuEProducto = new javax.swing.JMenuItem();
         menuVentas = new javax.swing.JMenu();
         menuRVenta = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         menuSueldos = new javax.swing.JMenu();
         menuSueldo = new javax.swing.JMenuItem();
         menuJornada = new javax.swing.JMenu();
@@ -65,15 +70,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuCerrarSesiion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(64, 33, 20));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new java.awt.Color(64, 33, 20));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(210, 80));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
 
         menu.setBackground(new java.awt.Color(211, 207, 195));
         menu.setForeground(new java.awt.Color(108, 76, 60));
@@ -127,10 +126,42 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuVentas.setPreferredSize(new java.awt.Dimension(210, 80));
 
         menuRVenta.setBackground(new java.awt.Color(211, 207, 195));
-        menuRVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/carrito.png"))); // NOI18N
-        menuRVenta.setText("Registrar venta");
+        menuRVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/nuevo.png"))); // NOI18N
+        menuRVenta.setText("Registrar artículo al menú");
         menuRVenta.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuRVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRVentaActionPerformed(evt);
+            }
+        });
         menuVentas.add(menuRVenta);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Modificar.png"))); // NOI18N
+        jMenuItem1.setLabel("Modificar artículo del menú");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuVentas.add(jMenuItem1);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/EliminarP.png"))); // NOI18N
+        jMenuItem4.setLabel("Eliminar artículo del menú");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menuVentas.add(jMenuItem4);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/anadir.png"))); // NOI18N
+        jMenuItem5.setText("Agregar venta");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        menuVentas.add(jMenuItem5);
 
         menu.add(menuVentas);
 
@@ -233,22 +264,27 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
     private void menuMProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMProductoActionPerformed
         // TODO add your handling code here:
+        System.out.println("1");
     }//GEN-LAST:event_menuMProductoActionPerformed
 
     private void menuMUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMUsuarioActionPerformed
         // TODO add your handling code here:
+        System.out.println("2");
     }//GEN-LAST:event_menuMUsuarioActionPerformed
 
     private void menuEUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEUsuarioActionPerformed
         // TODO add your handling code here:
+        System.out.println("3");
     }//GEN-LAST:event_menuEUsuarioActionPerformed
 
     private void menuRSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRSalidaActionPerformed
         // TODO add your handling code here:
+        System.out.println("4");
     }//GEN-LAST:event_menuRSalidaActionPerformed
 
     private void menuEProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEProductoActionPerformed
         // TODO add your handling code here:
+        System.out.println("5");
     }//GEN-LAST:event_menuEProductoActionPerformed
 
     private void menuIProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIProductoActionPerformed
@@ -259,6 +295,32 @@ public class OpcionesMenu extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_menuIProductoActionPerformed
+
+    private void menuRVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRVentaActionPerformed
+        RegistrarArticuloMenu registrarVenta = new RegistrarArticuloMenu();
+        jDesktopPane_menu.add(registrarVenta);
+        registrarVenta.setVisible(true);
+        registrarVenta.moveToFront();
+    }//GEN-LAST:event_menuRVentaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        ModificarArticuloMenu modificarArticuloMenu = new ModificarArticuloMenu();
+        jDesktopPane_menu.add(modificarArticuloMenu);
+        modificarArticuloMenu.setVisible(true);
+        modificarArticuloMenu.moveToFront();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        EliminarArticuloMenu eliminarArticuloMenu = new EliminarArticuloMenu();
+        jDesktopPane_menu.add(eliminarArticuloMenu);
+        eliminarArticuloMenu.setVisible(true);
+        eliminarArticuloMenu.moveToFront();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     public void setLoginTaqueria(LoginTaqueria loginTaqueria){
     }
@@ -303,7 +365,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem menuCerrarSesiion;
     private javax.swing.JMenuItem menuEProducto;
