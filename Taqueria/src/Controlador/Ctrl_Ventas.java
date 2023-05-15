@@ -11,8 +11,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -21,12 +25,12 @@ import javax.swing.JTextField;
  * @author diego
  */
 public class Ctrl_Ventas {
-    private String fechaActual;
+    private java.sql.Date fechaActual;
     private JTextField precioUnitarioTextField;
     
     public Ctrl_Ventas(){
         precioUnitarioTextField = null;
-        fechaActual = "";
+        fechaActual = null;
     }
     
     public boolean guardar(Venta venta){
@@ -36,7 +40,7 @@ public class Ctrl_Ventas {
         //String sql = "select usuario,password from usuarios where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
         int total_venta = getPrecio(venta.getItemID());
         total_venta *= venta.getCantidad();
-        String sql = "insert into ventas(item_id, id_empleado, cantidad, total_venta, fecha) values(" + venta.getItemID() + "," + venta.getIdEmpleado() +","+ venta.getCantidad() + "," + total_venta + ",'" + getFechaActual() + "');";
+        String sql = "insert into ventas(item_id, cantidad, total_venta, fecha) values(" + venta.getItemID() + "," + venta.getCantidad() + "," + total_venta + ",'" + getFechaActual() + "');";
         Statement st;
         try{
             st = cn.createStatement();
@@ -93,12 +97,19 @@ public class Ctrl_Ventas {
         return respuesta; 
     }
     
-    public String getFechaActual(){
+    public java.sql.Date getFechaActual(){
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
-        String str = formatter.format(date);
-        fechaActual = str;
-        System.out.print("Current date: "+str);
+        String date_str = formatter.format(date);
+        try {
+            date = formatter.parse(date_str);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        java.sql.Date dateDB = new java.sql.Date(date.getTime());
+        fechaActual = dateDB;
+        
+        System.out.print("Current date: "+date_str);
         return fechaActual;
     }
     

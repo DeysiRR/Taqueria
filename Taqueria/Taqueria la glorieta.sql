@@ -35,20 +35,22 @@ CREATE TABLE ventas (
 CREATE TABLE ventas (
 	venta_id int NOT NULL auto_increment,
 	item_id int NOT NULL,
-    id_empleado int NOT NULL,
     cantidad int NOT NULL,
     total_venta int,
     fecha DATE NOT NULL,
     primary key(venta_id),
     foreign key(item_id)
     references menu_catalogo(item_id)
-    ON DELETE RESTRICT ON UPDATE CASCADE,
-    foreign key(id_empleado) 
-    references empleados(id_empleado)
-    ON DELETE RESTRICT ON UPDATE CASCADE
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
-INSERT INTO ventas(item_id, id_empleado, cantidad, fecha)
-VALUES(26, 1, 2, "2023-11-05");
+
+delete from ventas
+where item_id = 31;
+
+delete from menu_catalogo
+where item_id = 31;
+
+select * from menu_catalogo;
 select * from ventas;
 DROP TABLE ventas;
 
