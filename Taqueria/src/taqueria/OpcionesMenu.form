@@ -135,7 +135,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Img/anadir.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Agregar venta"/>
+                <Property name="text" type="java.lang.String" value="Ventas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>

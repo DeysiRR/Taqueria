@@ -145,7 +145,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuVentas.add(jMenuItem1);
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/anadir.png"))); // NOI18N
-        jMenuItem5.setText("Agregar venta");
+        jMenuItem5.setText("Ventas");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);

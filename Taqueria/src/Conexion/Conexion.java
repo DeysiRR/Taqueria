@@ -10,7 +10,8 @@ public class Conexion {
     public static Connection conectar() {
         Connection cn = null;
         try {
-            String url = "jdbc:mysql://localhost:3306/taqueria_la_glorieta";
+            String url = "jdbc:mysql://localhost:3306/taqueria_la_glorieta?useSSL=false";
+            //String url = "jdbc:mysql://localhost:3306/taqueria_la_glorieta";
             String user = "root";
             //String password = "Jk01091997";
             String password = "D@gb282828";

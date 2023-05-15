@@ -44,25 +44,12 @@ CREATE TABLE ventas (
     ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-delete from ventas
-where item_id = 31;
-
-delete from menu_catalogo
-where item_id = 31;
-
-select * from menu_catalogo;
-select * from ventas;
-DROP TABLE ventas;
-
 CREATE TABLE menu_catalogo(
 	item_id int NOT NULL auto_increment,
     nombre varchar(30),
     precio_unit int,
     primary key(item_id)
 );
-select * from menu_catalogo;
-select item_id from menu_catalogo 
-where nombre = "tacos de marlin";
 
 CREATE TABLE inventario (
   id_producto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -73,7 +60,6 @@ CREATE TABLE inventario (
 );
 select * from inventario;
 
-
 -- Tabla de sueldos
 CREATE TABLE sueldos (
   id_sueldo INT NOT NULL AUTO_INCREMENT,
@@ -81,7 +67,8 @@ CREATE TABLE sueldos (
   fecha_pago DATE NOT NULL,
   monto_sueldo DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id_sueldo),
-  FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
+  FOREIGN KEY (id_empleado) 
+  REFERENCES empleados(id_empleado)
 );
 
 -- Tabla de registro de jornada
