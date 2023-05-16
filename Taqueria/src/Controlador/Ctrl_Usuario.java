@@ -15,7 +15,7 @@ public class Ctrl_Usuario {
         boolean respuesta = false;
         
         Connection cn= Conexion.conectar();
-        String sql = "select usuario,password from usuarios where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
+        String sql = "select usuario,password from empleados where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
         Statement st;
         try{
             st = cn.createStatement();

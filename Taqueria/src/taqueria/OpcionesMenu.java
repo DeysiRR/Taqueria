@@ -207,6 +207,11 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuRUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cliente.png"))); // NOI18N
         menuRUsuario.setText("Registrar usuario");
         menuRUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuRUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRUsuarioActionPerformed(evt);
+            }
+        });
         menuUsuario.add(menuRUsuario);
 
         menuMUsuario.setBackground(new java.awt.Color(211, 207, 195));
@@ -308,6 +313,13 @@ public class OpcionesMenu extends javax.swing.JFrame {
         agregarVenta.setVisible(true);
         agregarVenta.moveToFront();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void menuRUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRUsuarioActionPerformed
+        RegistrarUsuario registrarUsuario = new RegistrarUsuario();
+        jDesktopPane_menu.add(registrarUsuario);
+        registrarUsuario.setVisible(true);
+        registrarUsuario.moveToFront();
+    }//GEN-LAST:event_menuRUsuarioActionPerformed
 
     public void setLoginTaqueria(LoginTaqueria loginTaqueria){
     }
