@@ -125,9 +125,17 @@ public class Ctrl_ArticuloMenu {
     /*Para eliminar un articulo del menu de la BD*/
     public boolean eliminar(String nombre){
         boolean respuesta = false;
+        int item_id = getItemID(nombre);
+        
+        //Para eliminar las ventas que referencean al articulo que se quiere eliminar
+        if(!eliminarVenta(nombre)){
+            JOptionPane.showMessageDialog(null, "Error al conectarse al sistema...");
+        }
+
         Connection cn = Conexion.conectar();
         //String sql = "select usuario,password from usuarios where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
-        String sql = "delete from menu_catalogo " + "where nombre = '" + nombre + "';";
+        String sql = "delete from menu_catalogo where item_id = " + getItemID(nombre) + ";";
+
         Statement st;
         try{
             st = cn.createStatement();
@@ -139,6 +147,48 @@ public class Ctrl_ArticuloMenu {
             JOptionPane.showMessageDialog(null, "Error al conectarse al sistema...");
         }
         return respuesta; 
+    }
+    
+    public boolean eliminarVenta(String nombre){
+        boolean respuesta = false;
+        int item_id = getItemID(nombre);
+       
+        Connection cn = Conexion.conectar();
+        //String sql = "select usuario,password from usuarios where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
+        String sql = "delete from ventas where item_id = " + getItemID(nombre) + ";";
+
+        Statement st;
+        try{
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+            respuesta = true;
+            
+        }catch(SQLException e){
+            System.out.println("Error al conectarse al sistema..." + e);
+            JOptionPane.showMessageDialog(null, "Error al conectarse al sistema...");
+        }
+        return respuesta; 
+    }
+    
+    public int getItemID(String nombre){
+        int itemID = 0;
+        Connection cn = Conexion.conectar();
+        //String sql = "select usuario,password from usuarios where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
+        String sql = "select item_id from menu_catalogo where nombre = '" + nombre + "';";
+        Statement st;
+        ResultSet rs;
+        try{
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                String aux = rs.getString(1);
+                itemID = Integer.parseInt(aux);
+            }
+        }catch(SQLException e){
+            System.out.println("Error al conectarse al sistema..." + e);
+            JOptionPane.showMessageDialog(null, "Error al conectarse al sistema...");
+        }
+        return itemID;
     }
     
     /*Para checar si hay duplicado*/
