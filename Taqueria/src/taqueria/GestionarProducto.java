@@ -1,28 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package taqueria;
 
 import Conexion.Conexion;
+import Controlador.Ctrl_Inventario;
+import Modelo.MInventario;
+
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author 1
  */
 public class GestionarProducto extends javax.swing.JInternalFrame {
-    private int id_Producto; 
+
+    private int id_Productos;
+
     public GestionarProducto() {
         initComponents();
-        this.setSize(new Dimension(600,400));
+        this.setSize(new Dimension(600, 400));
         this.setTitle("Gestionar Productos");
-       
+        this.TablaProdcutos();
     }
 
     /**
@@ -44,7 +51,7 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
         txtGDescp = new javax.swing.JTextField();
         txtGCantidad = new javax.swing.JTextField();
         txtGProveedor = new javax.swing.JTextField();
-        txtGProducto = new javax.swing.JTextField();
+        txtGProductoNombre = new javax.swing.JTextField();
         buttonEliminarP = new javax.swing.JButton();
         buttonActualizarP = new javax.swing.JButton();
 
@@ -90,7 +97,7 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
         getContentPane().add(txtGDescp, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 330, -1));
         getContentPane().add(txtGCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 330, -1));
         getContentPane().add(txtGProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 330, -1));
-        getContentPane().add(txtGProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 330, -1));
+        getContentPane().add(txtGProductoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 330, -1));
 
         buttonEliminarP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonEliminarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/EliminarP.png"))); // NOI18N
@@ -100,7 +107,7 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
                 buttonEliminarPActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonEliminarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 110, -1));
+        getContentPane().add(buttonEliminarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 120, -1));
 
         buttonActualizarP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonActualizarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/configuraciones.png"))); // NOI18N
@@ -110,17 +117,60 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
                 buttonActualizarPActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonActualizarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 110, -1));
+        getContentPane().add(buttonActualizarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonEliminarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminarPActionPerformed
-        // TODO add your handling code here:
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+    
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        Ctrl_Inventario control = new Ctrl_Inventario();
+        if (control.eliminarProducto(id_Productos)) {
+            JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente");
+            txtGProductoNombre.setText("");
+            txtGDescp.setText("");
+            txtGCantidad.setText("");
+            txtGProveedor.setText("");
+            this.TablaProdcutos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al eliminar producto");
+        }
+    }
     }//GEN-LAST:event_buttonEliminarPActionPerformed
 
     private void buttonActualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActualizarPActionPerformed
-        // TODO add your handling code here:
+        // Verificar que todos los campos estén llenos
+        if (txtGProductoNombre.getText().isEmpty() || txtGDescp.getText().isEmpty() || txtGCantidad.getText().isEmpty() || txtGProveedor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son requeridos");
+            return;
+        }
+
+        // Crear objeto de tipo MInventario con los datos actualizados
+        MInventario objeto = new MInventario();
+        objeto.setNombre(txtGProductoNombre.getText());
+        objeto.setDescripcion(txtGDescp.getText());
+        try {
+            objeto.setCantidad(Integer.parseInt(txtGCantidad.getText()));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "La cantidad debe ser un número entero");
+            return;
+        }
+        objeto.setProovedor(txtGProveedor.getText());
+
+        // Actualizar el producto en la base de datos
+        Ctrl_Inventario control = new Ctrl_Inventario();
+        if (control.actualizarInventario(objeto, id_Productos)) {
+            JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente");
+            txtGProductoNombre.setText("");
+            txtGDescp.setText("");
+            txtGCantidad.setText("");
+            txtGProveedor.setText("");
+            this.TablaProdcutos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al actualizar producto");
+        }
     }//GEN-LAST:event_buttonActualizarPActionPerformed
 
 
@@ -136,37 +186,71 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
     public static javax.swing.JTable tablaGP;
     private javax.swing.JTextField txtGCantidad;
     private javax.swing.JTextField txtGDescp;
-    private javax.swing.JTextField txtGProducto;
+    private javax.swing.JTextField txtGProductoNombre;
     private javax.swing.JTextField txtGProveedor;
     // End of variables declaration//GEN-END:variables
 // Metodo para mostrar todas los datos del producto en la tabla
-    private void TablaProdcutos(){
-        Connection con= Conexion.conectar();  
-        DefaultTableModel model= new DefaultTableModel();
-        String sql = "select id_producto,nombre,descripcion,cantidad,proovedor";
+    private void TablaProdcutos() {
+        Connection con = Conexion.conectar();
+        DefaultTableModel model = new DefaultTableModel();
+        String sql = "select id_producto,nombre,descripcion,cantidad,proovedor from inventario  ";
         Statement st;
-        
-        try{
-            st=con.createStatement();
+
+        try {
+            st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            GestionarProducto.tablaGP= new JTable(model);
+            GestionarProducto.tablaGP = new JTable(model);
             GestionarProducto.jScrollPane1.setViewportView(GestionarProducto.tablaGP);
+
             model.addColumn("Id_Categoria");
+            model.addColumn("Nombre");
             model.addColumn("Descripcion");
-            model.addColumn("Categoria");
-            model.addColumn("Proveedor");
-            
-            while(rs.next()){
-                Object fila[] = new Object[3];
-                for(int i=0;i<3;i++){
-                    fila[i]=rs.getObject(i+1);
+            model.addColumn("Cantidad");
+            model.addColumn("Proovedor");
+
+            while (rs.next()) {
+                Object fila[] = new Object[5];
+                for (int i = 0; i < 5; i++) {
+                    fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila);
             }
             con.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error al llenar la tabla de productos");
         }
-        
+        tablaGP.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = tablaGP.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    id_Productos = (int) model.getValueAt(fila_point, columna_point);
+                    TransferirDatosInventario(id_Productos);
+
+                }
+            }
+        });
+
     }
+
+    private void TransferirDatosInventario(int id_Producto) {
+        try {
+            Connection con = Conexion.conectar();
+            PreparedStatement pst = con.prepareStatement("SELECT nombre, descripcion, cantidad, proovedor FROM inventario WHERE id_producto = ?");
+            pst.setInt(1, id_Producto);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txtGProductoNombre.setText(rs.getString("nombre"));
+                txtGDescp.setText(rs.getString("descripcion"));
+                txtGCantidad.setText(rs.getString("cantidad"));
+                txtGProveedor.setText(rs.getString("proovedor"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar producto: " + e.getMessage());
+        }
+    }
+
 }

@@ -51,7 +51,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuInv = new javax.swing.JMenu();
         menuIProducto = new javax.swing.JMenuItem();
         menuMProducto = new javax.swing.JMenuItem();
-        menuEProducto = new javax.swing.JMenuItem();
         menuVentas = new javax.swing.JMenu();
         menuRVenta = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -105,17 +104,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
             }
         });
         menuInv.add(menuMProducto);
-
-        menuEProducto.setBackground(new java.awt.Color(211, 207, 195));
-        menuEProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/EliminarP.png"))); // NOI18N
-        menuEProducto.setText("Eliminar producto");
-        menuEProducto.setPreferredSize(new java.awt.Dimension(210, 50));
-        menuEProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEProductoActionPerformed(evt);
-            }
-        });
-        menuInv.add(menuEProducto);
 
         menu.add(menuInv);
 
@@ -283,11 +271,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         System.out.println("4");
     }//GEN-LAST:event_menuRSalidaActionPerformed
 
-    private void menuEProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEProductoActionPerformed
-        // TODO add your handling code here:
-        System.out.println("5");
-    }//GEN-LAST:event_menuEProductoActionPerformed
-
     private void menuIProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIProductoActionPerformed
         Inventario inv = new Inventario();
         jDesktopPane_menu.add(inv);
@@ -371,7 +354,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem menuCerrarSesiion;
-    private javax.swing.JMenuItem menuEProducto;
     private javax.swing.JMenuItem menuEUsuario;
     private javax.swing.JMenuItem menuIProducto;
     private javax.swing.JMenu menuInv;
