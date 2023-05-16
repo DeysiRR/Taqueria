@@ -258,8 +258,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuMProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMProductoActionPerformed
-        // TODO add your handling code here:
-        System.out.println("1");
+        GestionarProducto gp = new GestionarProducto();
+        jDesktopPane_menu.add(gp);
+        gp.setVisible(true);
     }//GEN-LAST:event_menuMProductoActionPerformed
 
     private void menuMUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMUsuarioActionPerformed
