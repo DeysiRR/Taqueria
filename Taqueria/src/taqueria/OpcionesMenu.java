@@ -55,7 +55,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuVentas = new javax.swing.JMenu();
         menuRVenta = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         menuSueldos = new javax.swing.JMenu();
         menuSueldo = new javax.swing.JMenuItem();
@@ -137,7 +136,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuVentas.add(menuRVenta);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Modificar.png"))); // NOI18N
-        jMenuItem1.setLabel("Modificar artículo del menú");
+        jMenuItem1.setText("Gestionar artículo del menú");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -145,17 +144,8 @@ public class OpcionesMenu extends javax.swing.JFrame {
         });
         menuVentas.add(jMenuItem1);
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/EliminarP.png"))); // NOI18N
-        jMenuItem4.setLabel("Eliminar artículo del menú");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        menuVentas.add(jMenuItem4);
-
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/anadir.png"))); // NOI18N
-        jMenuItem5.setText("Agregar venta");
+        jMenuItem5.setText("Ventas");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -217,6 +207,11 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuRUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cliente.png"))); // NOI18N
         menuRUsuario.setText("Registrar usuario");
         menuRUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuRUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRUsuarioActionPerformed(evt);
+            }
+        });
         menuUsuario.add(menuRUsuario);
 
         menuMUsuario.setBackground(new java.awt.Color(211, 207, 195));
@@ -306,22 +301,26 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        ModificarArticuloMenu modificarArticuloMenu = new ModificarArticuloMenu();
+        GestionarArticuloMenu modificarArticuloMenu = new GestionarArticuloMenu();
         jDesktopPane_menu.add(modificarArticuloMenu);
         modificarArticuloMenu.setVisible(true);
         modificarArticuloMenu.moveToFront();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        EliminarArticuloMenu eliminarArticuloMenu = new EliminarArticuloMenu();
-        jDesktopPane_menu.add(eliminarArticuloMenu);
-        eliminarArticuloMenu.setVisible(true);
-        eliminarArticuloMenu.moveToFront();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+        AgregarVenta agregarVenta = new AgregarVenta();
+        jDesktopPane_menu.add(agregarVenta);
+        agregarVenta.setVisible(true);
+        agregarVenta.moveToFront();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void menuRUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRUsuarioActionPerformed
+        RegistrarUsuario registrarUsuario = new RegistrarUsuario();
+        jDesktopPane_menu.add(registrarUsuario);
+        registrarUsuario.setVisible(true);
+        registrarUsuario.moveToFront();
+    }//GEN-LAST:event_menuRUsuarioActionPerformed
 
     public void setLoginTaqueria(LoginTaqueria loginTaqueria){
     }
@@ -367,7 +366,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem menuCerrarSesiion;
