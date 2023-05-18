@@ -10,16 +10,6 @@ telefono varchar(10) not null,
 estado int (1) not null 
 );
 
--- Tabla de inventario
-CREATE TABLE inventario (
-  id_producto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  descripcion VARCHAR(100),
-  cantidad INT NOT NULL,
-  proovedor VARCHAR(50)
-);
-select * from inventario;
-
 -- Tabla de ventas
 CREATE TABLE ventas (
 	venta_id int NOT NULL auto_increment,
@@ -47,7 +37,7 @@ CREATE TABLE inventario (
   cantidad INT NOT NULL,
   proovedor VARCHAR(50)
 );
-select * from inventario;
+
 
 -- Tabla de sueldos
 CREATE TABLE sueldos (
@@ -86,15 +76,20 @@ CREATE TABLE empleados (
   ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (id_empleado)
 );
+
+
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("diego", "gonzalez", "tijuana", "664", "admin", "123", 5); #5 para admin
 select * from empleados;
+INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
+VALUES("Deysi", "Rufino", "tijuana", "663", "admin", "125", 5);
 
 CREATE TABLE catalogo_puestos (
 	id_puesto INT NOT NULL AUTO_INCREMENT,
     puesto_empleado VARCHAR(50) NOT NULL,
     PRIMARY KEY(id_puesto)
 );
+
 INSERT INTO catalogo_puestos(puesto_empleado)
 VALUES("asador"),("taquero"),("mesero"),("cajero"),("admin");
 select * from catalogo_puestos;
@@ -102,9 +97,32 @@ select * from catalogo_puestos;
 select puesto_empleado
 from catalogo_puestos;
 
-
-
 select concat(nombre_empleado, ' ', apellido_empleado) from empleados;
 select id_empleado from empleados where nombre_empleado = 'diego' and apellido_empleado = 'gonzalez';
 select usuario, password from usuarios
 where usuario="Admin" and password="12345";
+
+select * from empleados;
+
+CREATE TABLE insumos (
+  id_insumo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL,
+  cantidad INT NOT NULL,
+  unidad_medida VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE recetas (
+  id_receta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL,
+  descripcion VARCHAR(100),
+  precio int NOT NULL
+);
+
+CREATE TABLE recetas_insumos (
+  id_receta INT NOT NULL,
+  id_insumo INT NOT NULL,
+  cantidad_requerida INT NOT NULL,
+  PRIMARY KEY (id_receta, id_insumo),
+  FOREIGN KEY (id_receta) REFERENCES recetas (id_receta),
+  FOREIGN KEY (id_insumo) REFERENCES insumos (id_insumo)
+);

@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import Conexion.Conexion;
@@ -11,23 +10,24 @@ import java.sql.ResultSet;
 
 public class Ctrl_Usuario {
     //metodo para iniciar sesion
-    public boolean LoginTaqueria (Usuario objeto){
+
+    public boolean LoginTaqueria(Usuario objeto) {
         boolean respuesta = false;
-        
-        Connection cn= Conexion.conectar();
+
+        Connection cn = Conexion.conectar();
         String sql = "select usuario,password from empleados where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
         Statement st;
-        try{
+        try {
             st = cn.createStatement();
-             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                respuesta=true;
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                respuesta = true;
 
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error al iniciar sesion" + e);
             JOptionPane.showMessageDialog(null, "Error al iniciar sesion");
         }
-        return respuesta; 
+        return respuesta;
     }
 }
