@@ -97,6 +97,12 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
         getContentPane().add(txtGDescp, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 330, -1));
         getContentPane().add(txtGCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 330, -1));
         getContentPane().add(txtGProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 330, -1));
+
+        txtGProductoNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGProductoNombreActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtGProductoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 330, -1));
 
         buttonEliminarP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -172,6 +178,10 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al actualizar producto");
         }
     }//GEN-LAST:event_buttonActualizarPActionPerformed
+
+    private void txtGProductoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGProductoNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGProductoNombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
