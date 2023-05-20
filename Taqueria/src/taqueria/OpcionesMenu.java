@@ -6,36 +6,31 @@ package taqueria;
 
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
-
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author diego
  */
 public class OpcionesMenu extends javax.swing.JFrame {
+
     public static JDesktopPane jDesktopPane_menu;
-      
+
     public OpcionesMenu() {
         initComponents();
-        this.setSize(new Dimension (1200,700));
-       // this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setSize(new Dimension(1200, 700));
+        // this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setTitle("TAQUERIA LA GLORIETA");
         this.setLayout(null);
-        jDesktopPane_menu= new JDesktopPane();
+        jDesktopPane_menu = new JDesktopPane();
         this.setLayout(null);
-        jDesktopPane_menu= new JDesktopPane();
-        int ancho=java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.jDesktopPane_menu.setBounds(0,0,ancho,(alto-110));
+        jDesktopPane_menu = new JDesktopPane();
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.jDesktopPane_menu.setBounds(0, 0, ancho, (alto - 110));
         this.add(jDesktopPane_menu);
-        
-        
-        
-        
-        
-        
-       
+
     }
 
     /**
@@ -51,7 +46,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuInv = new javax.swing.JMenu();
         menuIProducto = new javax.swing.JMenuItem();
         menuMProducto = new javax.swing.JMenuItem();
-        menuEProducto = new javax.swing.JMenuItem();
         menuVentas = new javax.swing.JMenu();
         menuRVenta = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -60,7 +54,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuSueldo = new javax.swing.JMenuItem();
         menuJornada = new javax.swing.JMenu();
         menuREntrada = new javax.swing.JMenuItem();
-        menuRSalida = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenu();
         menuRUsuario = new javax.swing.JMenuItem();
         menuMUsuario = new javax.swing.JMenuItem();
@@ -104,17 +97,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
             }
         });
         menuInv.add(menuMProducto);
-
-        menuEProducto.setBackground(new java.awt.Color(211, 207, 195));
-        menuEProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/EliminarP.png"))); // NOI18N
-        menuEProducto.setText("Eliminar producto");
-        menuEProducto.setPreferredSize(new java.awt.Dimension(210, 50));
-        menuEProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEProductoActionPerformed(evt);
-            }
-        });
-        menuInv.add(menuEProducto);
 
         menu.add(menuInv);
 
@@ -179,20 +161,14 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
         menuREntrada.setBackground(new java.awt.Color(211, 207, 195));
         menuREntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Entrada.png"))); // NOI18N
-        menuREntrada.setText("Registrar entrada");
+        menuREntrada.setText("Registrar jornada");
         menuREntrada.setPreferredSize(new java.awt.Dimension(210, 50));
-        menuJornada.add(menuREntrada);
-
-        menuRSalida.setBackground(new java.awt.Color(211, 207, 195));
-        menuRSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Salida.png"))); // NOI18N
-        menuRSalida.setText("Registrar salida");
-        menuRSalida.setPreferredSize(new java.awt.Dimension(210, 50));
-        menuRSalida.addActionListener(new java.awt.event.ActionListener() {
+        menuREntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRSalidaActionPerformed(evt);
+                menuREntradaActionPerformed(evt);
             }
         });
-        menuJornada.add(menuRSalida);
+        menuJornada.add(menuREntrada);
 
         menu.add(menuJornada);
 
@@ -248,6 +224,11 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuCerrarSesiion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Exit.png"))); // NOI18N
         menuCerrarSesiion.setText("Cerrar sesion");
         menuCerrarSesiion.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuCerrarSesiion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCerrarSesiionActionPerformed(evt);
+            }
+        });
         menuSalir.add(menuCerrarSesiion);
 
         menu.add(menuSalir);
@@ -273,23 +254,13 @@ public class OpcionesMenu extends javax.swing.JFrame {
         System.out.println("3");
     }//GEN-LAST:event_menuEUsuarioActionPerformed
 
-    private void menuRSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRSalidaActionPerformed
-        // TODO add your handling code here:
-        System.out.println("4");
-    }//GEN-LAST:event_menuRSalidaActionPerformed
-
-    private void menuEProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEProductoActionPerformed
-        // TODO add your handling code here:
-        System.out.println("5");
-    }//GEN-LAST:event_menuEProductoActionPerformed
-
     private void menuIProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIProductoActionPerformed
         Inventario inv = new Inventario();
         jDesktopPane_menu.add(inv);
         inv.setVisible(true);
         inv.moveToFront();
-        
-        
+
+
     }//GEN-LAST:event_menuIProductoActionPerformed
 
     private void menuRVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRVentaActionPerformed
@@ -322,12 +293,34 @@ public class OpcionesMenu extends javax.swing.JFrame {
         registrarUsuario.moveToFront();
     }//GEN-LAST:event_menuRUsuarioActionPerformed
 
-    public void setLoginTaqueria(LoginTaqueria loginTaqueria){
-    }
+    private void menuCerrarSesiionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesiionActionPerformed
+      
     
-   // public void setUsuarioLogged(Usuario usuario){
-        //usuarioLogged = usuario;
-  //  }
+        JOptionPane.showMessageDialog(this, "Sesión cerrada correctamente");
+
+        // Redirigir al formulario de inicio de sesión
+        
+        //LoginTaqueria formularioInicioSesion = new LoginTaqueria();
+        //formularioInicioSesion.setVisible(true);
+
+        // Cerrar la ventana actual
+        this.dispose();
+    }//GEN-LAST:event_menuCerrarSesiionActionPerformed
+
+    private void menuREntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuREntradaActionPerformed
+       RegistrarJornada rj=new RegistrarJornada();
+       jDesktopPane_menu.add(rj);
+       rj.setVisible(true);
+       rj.moveToFront();
+       
+    }//GEN-LAST:event_menuREntradaActionPerformed
+
+    public void setLoginTaqueria(LoginTaqueria loginTaqueria) {
+    }
+
+    // public void setUsuarioLogged(Usuario usuario){
+    //usuarioLogged = usuario;
+    //  }
     /**
      * @param args the command line arguments
      */
@@ -362,14 +355,13 @@ public class OpcionesMenu extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem menuCerrarSesiion;
-    private javax.swing.JMenuItem menuEProducto;
     private javax.swing.JMenuItem menuEUsuario;
     private javax.swing.JMenuItem menuIProducto;
     private javax.swing.JMenu menuInv;
@@ -377,7 +369,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMProducto;
     private javax.swing.JMenuItem menuMUsuario;
     private javax.swing.JMenuItem menuREntrada;
-    private javax.swing.JMenuItem menuRSalida;
     private javax.swing.JMenuItem menuRUsuario;
     private javax.swing.JMenuItem menuRVenta;
     private javax.swing.JMenu menuSalir;
