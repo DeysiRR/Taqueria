@@ -39,7 +39,6 @@ CREATE TABLE inventario (
   proovedor VARCHAR(50)
 );
 
-
 -- Tabla de sueldos
 CREATE TABLE sueldos (
   id_sueldo INT NOT NULL AUTO_INCREMENT,
@@ -79,9 +78,15 @@ CREATE TABLE empleados (
   PRIMARY KEY (id_empleado)
 );
 
+select puesto_empleado from empleados
+	inner join catalogo_puestos 
+	on catalogo_puestos.id_puesto = empleados.id_puesto
+where usuario = 'admin' and password = '123';
 
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("diego", "gonzalez", "tijuana", "664", "admin", "123", 5); #5 para admin
+INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
+VALUES("diego", "gonzalez", "tijuana", "664", "diego", "123", 3); #5 para admin
 select * from empleados;
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("Deysi", "Rufino", "tijuana", "663", "admin", "125", 5);

@@ -4,6 +4,8 @@
  */
 package taqueria;
 
+import Controlador.Ctrl_Usuario;
+import Modelo.Usuario;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -15,6 +17,7 @@ import javax.swing.JOptionPane;
 public class OpcionesMenu extends javax.swing.JFrame {
 
     public static JDesktopPane jDesktopPane_menu;
+    private Usuario usuarioLoggedIn;
 
     public OpcionesMenu() {
         initComponents();
@@ -315,7 +318,24 @@ public class OpcionesMenu extends javax.swing.JFrame {
        
     }//GEN-LAST:event_menuREntradaActionPerformed
 
-    public void setLoginTaqueria(LoginTaqueria loginTaqueria) {
+    public void usuarioLoggedIn(Usuario usuario){
+        usuarioLoggedIn = usuario;
+        Ctrl_Usuario ctrlUsuario = new Ctrl_Usuario();
+        ctrlUsuario.obtenerPuesto(usuarioLoggedIn);
+        
+        switch(usuarioLoggedIn.getPuestoEmpleado()){
+            case "admin" -> {
+            }
+            case "cajero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+            }
+            case "mesero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+            }
+            default -> JOptionPane.showMessageDialog(null, "Error: no se reconoció el puesto del empleado.");
+        }
     }
 
     // public void setUsuarioLogged(Usuario usuario){
