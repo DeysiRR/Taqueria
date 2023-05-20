@@ -29,6 +29,7 @@ CREATE TABLE menu_catalogo(
     precio_unit int,
     primary key(item_id)
 );
+select * from menu_catalogo;
 
 CREATE TABLE inventario (
   id_producto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -60,7 +61,8 @@ CREATE TABLE registro_jornada (
   PRIMARY KEY (id_registro),
   FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
 );
-
+select * from registro_jornada;
+DELETE FROM registro_jornada;
 -- Tabla de empleados
 CREATE TABLE empleados (
   id_empleado INT NOT NULL AUTO_INCREMENT,
@@ -83,7 +85,10 @@ VALUES("diego", "gonzalez", "tijuana", "664", "admin", "123", 5); #5 para admin
 select * from empleados;
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("Deysi", "Rufino", "tijuana", "663", "admin", "125", 5);
-
+INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
+VALUES("Nora", "Ornelas", "tijuana", "663", "admin", "124", 5);
+INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
+VALUES("Carla", "Perez", "tijuana", "663", "admin", "124", 5);
 CREATE TABLE catalogo_puestos (
 	id_puesto INT NOT NULL AUTO_INCREMENT,
     puesto_empleado VARCHAR(50) NOT NULL,
@@ -126,3 +131,5 @@ CREATE TABLE recetas_insumos (
   FOREIGN KEY (id_receta) REFERENCES recetas (id_receta),
   FOREIGN KEY (id_insumo) REFERENCES insumos (id_insumo)
 );
+
+ALTER TABLE registro_jornada MODIFY COLUMN hora_salida TIME DEFAULT NULL;
