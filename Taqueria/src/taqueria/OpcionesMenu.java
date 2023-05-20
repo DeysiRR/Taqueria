@@ -60,7 +60,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuUsuario = new javax.swing.JMenu();
         menuRUsuario = new javax.swing.JMenuItem();
         menuMUsuario = new javax.swing.JMenuItem();
-        menuEUsuario = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenu();
         menuCerrarSesiion = new javax.swing.JMenuItem();
 
@@ -204,17 +203,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         });
         menuUsuario.add(menuMUsuario);
 
-        menuEUsuario.setBackground(new java.awt.Color(211, 207, 195));
-        menuEUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/EliminarP.png"))); // NOI18N
-        menuEUsuario.setText("Eliminar usauario");
-        menuEUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
-        menuEUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEUsuarioActionPerformed(evt);
-            }
-        });
-        menuUsuario.add(menuEUsuario);
-
         menu.add(menuUsuario);
 
         menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Salir.png"))); // NOI18N
@@ -251,11 +239,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println("2");
     }//GEN-LAST:event_menuMUsuarioActionPerformed
-
-    private void menuEUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEUsuarioActionPerformed
-        // TODO add your handling code here:
-        System.out.println("3");
-    }//GEN-LAST:event_menuEUsuarioActionPerformed
 
     private void menuIProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIProductoActionPerformed
         Inventario inv = new Inventario();
@@ -297,14 +280,13 @@ public class OpcionesMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuRUsuarioActionPerformed
 
     private void menuCerrarSesiionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesiionActionPerformed
-      
-    
+
         JOptionPane.showMessageDialog(this, "Sesión cerrada correctamente");
 
         // Redirigir al formulario de inicio de sesión
         
-        //LoginTaqueria formularioInicioSesion = new LoginTaqueria();
-        //formularioInicioSesion.setVisible(true);
+        LoginTaqueria formularioInicioSesion = new LoginTaqueria();
+        formularioInicioSesion.setVisible(true);
 
         // Cerrar la ventana actual
         this.dispose();
@@ -325,16 +307,63 @@ public class OpcionesMenu extends javax.swing.JFrame {
         
         switch(usuarioLoggedIn.getPuestoEmpleado()){
             case "admin" -> {
+                this.setTitle("TAQUERIA LA GLORIETA (admin)");
             }
-            case "cajero" -> {
+            case "asador" -> {
                 menuIProducto.setEnabled(false);
                 menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (asador)");
+            }
+            case "taquero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (taquero)");
             }
             case "mesero" -> {
                 menuIProducto.setEnabled(false);
                 menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (mesero)");
             }
-            default -> JOptionPane.showMessageDialog(null, "Error: no se reconoció el puesto del empleado.");
+            case "cajero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (cajero)");
+            }
+            default -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                menuREntrada.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Error: no se reconoció el puesto del empleado.");
+                //System.out.println(usuario.getPuestoEmpleado());
+            }
         }
     }
 
@@ -382,7 +411,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem menuCerrarSesiion;
-    private javax.swing.JMenuItem menuEUsuario;
     private javax.swing.JMenuItem menuIProducto;
     private javax.swing.JMenu menuInv;
     private javax.swing.JMenu menuJornada;

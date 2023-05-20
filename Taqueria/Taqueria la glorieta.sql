@@ -78,27 +78,27 @@ CREATE TABLE empleados (
   PRIMARY KEY (id_empleado)
 );
 
-select puesto_empleado from empleados
-	inner join catalogo_puestos 
-	on catalogo_puestos.id_puesto = empleados.id_puesto
-where usuario = 'admin' and password = '123';
+UPDATE empleados
+SET id_puesto = 4
+WHERE usuario = 'mariano';
 
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("diego", "gonzalez", "tijuana", "664", "admin", "123", 5); #5 para admin
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("diego", "gonzalez", "tijuana", "664", "diego", "123", 3); #5 para admin
+VALUES("diego", "gonzalez", "tijuana", "664", "mariano", "123", 2); #5 para admin
 select * from empleados;
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("Deysi", "Rufino", "tijuana", "663", "admin", "125", 5);
+VALUES("Deysi", "Rufino", "tijuana", "663", "cajero", "123", 4);
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("Nora", "Ornelas", "tijuana", "663", "admin", "124", 5);
+VALUES("Nora", "Ornelas", "tijuana", "663", "mesero", "123", 3);
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("Carla", "Perez", "tijuana", "663", "admin", "124", 5);
+VALUES("Carla", "Perez", "tijuana", "663", "admin2", "123", 2);
 CREATE TABLE catalogo_puestos (
 	id_puesto INT NOT NULL AUTO_INCREMENT,
     puesto_empleado VARCHAR(50) NOT NULL,
     PRIMARY KEY(id_puesto)
 );
+
 
 INSERT INTO catalogo_puestos(puesto_empleado)
 VALUES("asador"),("taquero"),("mesero"),("cajero"),("admin");
