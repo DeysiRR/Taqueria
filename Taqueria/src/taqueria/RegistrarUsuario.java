@@ -283,15 +283,18 @@ public class RegistrarUsuario extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-
-            
-        if(!empleado.getNombreEmpleado().isBlank() && !empleado.getApellidoEmpleado().isBlank()
+        if(!empleado.getUsuario().isBlank() && !existeNombreUsuario(empleado.getUsuario())){
+            if(!empleado.getNombreEmpleado().isBlank() && !empleado.getApellidoEmpleado().isBlank()
                 && !empleado.getPuestoEmpleado().isBlank() && !empleado.getUsuario().isBlank()
                    && !empleado.getPassword().isBlank()){
             guardar();
             empleado = new Empleado();
+            JOptionPane.showMessageDialog(null, "Se creó el nuevo usuario correctamente.");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error: los datos que ingresó no son válidos.");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Error: los datos que ingresó no son válidos.");
+            JOptionPane.showMessageDialog(null, "Error: el nombre de usuario que usted ingreso ya existe. Intente uno nuevo.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -415,6 +418,30 @@ public class RegistrarUsuario extends javax.swing.JInternalFrame {
             System.out.println("Error al obtener el catalogo de puestos de la base de datos...");
         }
         return id_puesto;
+    }
+    
+    public boolean existeNombreUsuario(String nombre_usuario){
+        Connection cn = Conexion.conectar();  
+
+        String sql = "select usuario from empleados where usuario = '"+nombre_usuario+"';";
+        Statement st;
+        boolean respuesta = false;
+        try{
+            st=cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            //Comparar si usuario ingresado ya existe
+            while(rs.next()){
+                if(nombre_usuario.equals(rs.getString(1))){
+                    respuesta = true;
+                }                
+            }
+            st.close();
+            cn.close();
+        }catch(SQLException e){
+            System.out.println("Error al obtener el catalogo de puestos de la base de datos...");
+        }
+        return respuesta;
     }
     
     

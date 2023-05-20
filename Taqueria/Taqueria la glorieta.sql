@@ -78,10 +78,6 @@ CREATE TABLE empleados (
   PRIMARY KEY (id_empleado)
 );
 
-UPDATE empleados
-SET id_puesto = 4
-WHERE usuario = 'mariano';
-
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("diego", "gonzalez", "tijuana", "664", "admin", "123", 5); #5 para admin
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
