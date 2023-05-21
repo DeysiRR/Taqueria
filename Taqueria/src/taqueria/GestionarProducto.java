@@ -60,7 +60,7 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Gestion de productos");
+        jLabel1.setText("Gestión de productos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 0, -1, -1));
 
         tablaGP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

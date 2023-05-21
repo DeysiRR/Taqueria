@@ -194,7 +194,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
         menuMUsuario.setBackground(new java.awt.Color(211, 207, 195));
         menuMUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Modificar.png"))); // NOI18N
-        menuMUsuario.setText("Modificar usuario");
+        menuMUsuario.setText("Gestionar usuarios");
         menuMUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
         menuMUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +237,9 @@ public class OpcionesMenu extends javax.swing.JFrame {
 
     private void menuMUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMUsuarioActionPerformed
         // TODO add your handling code here:
-        System.out.println("2");
+        GestionarUsuario gestionarUsuario = new GestionarUsuario();
+        jDesktopPane_menu.add(gestionarUsuario);
+        gestionarUsuario.setVisible(true);
     }//GEN-LAST:event_menuMUsuarioActionPerformed
 
     private void menuIProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIProductoActionPerformed
