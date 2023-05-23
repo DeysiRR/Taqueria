@@ -158,6 +158,7 @@ public class OpcionesMenu extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
+<<<<<<< Updated upstream
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -191,6 +192,104 @@ public class OpcionesMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+=======
+        menuSueldos.setBackground(new java.awt.Color(108, 76, 60));
+        menuSueldos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Sueldo.png"))); // NOI18N
+        menuSueldos.setText("MANEJO DE SUELDOS");
+        menuSueldos.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        menuSueldos.setMinimumSize(new java.awt.Dimension(180, 80));
+        menuSueldos.setPreferredSize(new java.awt.Dimension(210, 80));
+        menuSueldos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSueldosActionPerformed(evt);
+            }
+        });
+
+        menuSueldo.setBackground(new java.awt.Color(211, 207, 195));
+        menuSueldo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sueldo.png"))); // NOI18N
+        menuSueldo.setText("Sueldo");
+        menuSueldo.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuSueldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSueldoActionPerformed(evt);
+            }
+        });
+        menuSueldos.add(menuSueldo);
+
+        menu.add(menuSueldos);
+
+        menuJornada.setBackground(new java.awt.Color(108, 76, 60));
+        menuJornada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Jornada.png"))); // NOI18N
+        menuJornada.setText("REGISTRO DE JORNADA");
+        menuJornada.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        menuJornada.setMinimumSize(new java.awt.Dimension(180, 80));
+        menuJornada.setPreferredSize(new java.awt.Dimension(210, 80));
+
+        menuREntrada.setBackground(new java.awt.Color(211, 207, 195));
+        menuREntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Entrada.png"))); // NOI18N
+        menuREntrada.setText("Registrar jornada");
+        menuREntrada.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuREntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuREntradaActionPerformed(evt);
+            }
+        });
+        menuJornada.add(menuREntrada);
+
+        menu.add(menuJornada);
+
+        menuUsuario.setBackground(new java.awt.Color(211, 207, 195));
+        menuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/clientes.png"))); // NOI18N
+        menuUsuario.setText("USUARIOS");
+        menuUsuario.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        menuUsuario.setMinimumSize(new java.awt.Dimension(180, 80));
+        menuUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
+
+        menuRUsuario.setBackground(new java.awt.Color(211, 207, 195));
+        menuRUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cliente.png"))); // NOI18N
+        menuRUsuario.setText("Registrar usuario");
+        menuRUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuRUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRUsuarioActionPerformed(evt);
+            }
+        });
+        menuUsuario.add(menuRUsuario);
+
+        menuMUsuario.setBackground(new java.awt.Color(211, 207, 195));
+        menuMUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Modificar.png"))); // NOI18N
+        menuMUsuario.setText("Gestionar usuarios");
+        menuMUsuario.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuMUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMUsuarioActionPerformed(evt);
+            }
+        });
+        menuUsuario.add(menuMUsuario);
+
+        menu.add(menuUsuario);
+
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Salir.png"))); // NOI18N
+        menuSalir.setText("SALIR");
+        menuSalir.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        menuSalir.setMinimumSize(new java.awt.Dimension(180, 80));
+        menuSalir.setPreferredSize(new java.awt.Dimension(210, 80));
+
+        menuCerrarSesiion.setBackground(new java.awt.Color(211, 207, 195));
+        menuCerrarSesiion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Exit.png"))); // NOI18N
+        menuCerrarSesiion.setText("Cerrar sesion");
+        menuCerrarSesiion.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuCerrarSesiion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCerrarSesiionActionPerformed(evt);
+            }
+        });
+        menuSalir.add(menuCerrarSesiion);
+
+        menu.add(menuSalir);
+
+        setJMenuBar(menu);
+>>>>>>> Stashed changes
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,12 +320,111 @@ public class OpcionesMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+<<<<<<< Updated upstream
     public void setLoginTaqueria(LoginTaqueria loginTaqueria){
         this.loginTaqueria = loginTaqueria;
     }
     
     public void setUsuarioLogged(Usuario usuario){
         usuarioLogged = usuario;
+=======
+        JOptionPane.showMessageDialog(this, "Sesión cerrada correctamente");
+
+        // Redirigir al formulario de inicio de sesión
+        
+        LoginTaqueria formularioInicioSesion = new LoginTaqueria();
+        formularioInicioSesion.setVisible(true);
+
+        // Cerrar la ventana actual
+        this.dispose();
+    }//GEN-LAST:event_menuCerrarSesiionActionPerformed
+
+    private void menuREntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuREntradaActionPerformed
+       RegistrarJornada rj=new RegistrarJornada();
+       jDesktopPane_menu.add(rj);
+       rj.setVisible(true);
+       rj.moveToFront();       
+    }//GEN-LAST:event_menuREntradaActionPerformed
+
+    private void menuSueldosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSueldosActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menuSueldosActionPerformed
+
+    private void menuSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSueldoActionPerformed
+        // TODO add your handling code here:
+        Sueldos s = new Sueldos();
+        jDesktopPane_menu.add(s);
+        s.setVisible(true);
+        s.moveToFront();
+    }//GEN-LAST:event_menuSueldoActionPerformed
+
+    public void usuarioLoggedIn(Usuario usuario){
+        usuarioLoggedIn = usuario;
+        Ctrl_Usuario ctrlUsuario = new Ctrl_Usuario();
+        ctrlUsuario.obtenerPuesto(usuarioLoggedIn);
+        
+        switch(usuarioLoggedIn.getPuestoEmpleado()){
+            case "admin" -> {
+                this.setTitle("TAQUERIA LA GLORIETA (admin)");
+            }
+            case "asador" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (asador)");
+            }
+            case "taquero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (taquero)");
+            }
+            case "mesero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (mesero)");
+            }
+            case "cajero" -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                this.setTitle("TAQUERIA LA GLORIETA (cajero)");
+            }
+            default -> {
+                menuIProducto.setEnabled(false);
+                menuMProducto.setEnabled(false);
+                menuRVenta.setEnabled(false);
+                jMenuItem1.setEnabled(false);
+                jMenuItem5.setEnabled(false);
+                menuRUsuario.setEnabled(false);
+                menuMUsuario.setEnabled(false);
+                menuREntrada.setEnabled(false);
+                menuSueldo.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Error: no se reconoció el puesto del empleado.");
+                //System.out.println(usuario.getPuestoEmpleado());
+            }
+        }
+>>>>>>> Stashed changes
     }
     /**
      * @param args the command line arguments
