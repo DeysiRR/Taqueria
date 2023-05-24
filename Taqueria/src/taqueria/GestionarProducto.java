@@ -1,7 +1,7 @@
 package taqueria;
 
 import Conexion.Conexion;
-import Controlador.Ctrl_Inventario;
+import Controlador.ctrl_Inventario;
 import Modelo.MInventario;
 
 import java.awt.Dimension;
@@ -139,7 +139,7 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
         int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
         if (confirmacion == JOptionPane.YES_OPTION) {
-            Ctrl_Inventario control = new Ctrl_Inventario();
+            ctrl_Inventario control = new ctrl_Inventario();
             if (control.eliminarProducto(id_Productos)) {
                 JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente");
                 txtGProductoNombre.setText("");
@@ -217,7 +217,7 @@ public class GestionarProducto extends javax.swing.JInternalFrame {
         }
 
 // Actualizar el producto en la base de datos
-        Ctrl_Inventario control = new Ctrl_Inventario();
+        ctrl_Inventario control = new ctrl_Inventario();
         if (control.actualizarInventario(objeto, id_Productos)) {
             JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente");
             txtGProductoNombre.setText("");

@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Ctrl_Inventario {
+public class ctrl_Inventario {
 
     //metodo para registar producto
     public boolean guardar(MInventario objeto) {
