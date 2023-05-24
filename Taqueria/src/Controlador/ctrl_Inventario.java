@@ -32,24 +32,27 @@ public class Ctrl_Inventario {
     }
 
     //consultar si ya se ha registrado el producto
-    public boolean existeProducto(String objeto) {
-        boolean respuesta = false;
-        String sql = "select nombre, descripcion, cantidad, provedor from inventario where nombre = ? and descripcion = ? and cantidad = ? and proovedor = ?";
-        Statement st;
-        try {
-            Connection cn = Conexion.conectar();
-            st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                respuesta = true;
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al consultar el producto: " + e);
+    public boolean existeProducto(String nombre, String descripcion, int cantidad, String proveedor) {
+    boolean respuesta = false;
+    String sql = "SELECT nombre, descripcion, cantidad, proveedor FROM inventario WHERE nombre = ? AND descripcion = ? AND cantidad = ? AND proveedor = ?";
+    try {
+        Connection cn = Conexion.conectar();
+        PreparedStatement consulta = cn.prepareStatement(sql);
+        consulta.setString(1, nombre);
+        consulta.setString(2, descripcion);
+        consulta.setInt(3, cantidad);
+        consulta.setString(4, proveedor);
+        ResultSet rs = consulta.executeQuery();
+        if (rs.next()) {
+            respuesta = true;
         }
-        return respuesta;
+        cn.close();
+    } catch (SQLException e) {
+        System.out.println("Error al consultar el producto: " + e);
     }
+    return respuesta;
+}
+
 //metodo para actualizar el invdntario
 
     public boolean actualizarInventario(MInventario objeto, int id_producto) {

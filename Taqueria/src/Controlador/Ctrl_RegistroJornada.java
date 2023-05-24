@@ -81,12 +81,29 @@ public class Ctrl_RegistroJornada {
         return respuesta;
     }
 
-    //metodo para registrar salida
     public boolean salida(RegistroJornada objeto) {
         boolean respuesta = false;
         Connection con = Conexion.conectar();
 
         try {
+            // Verificar si ya se registró la salida para el registro de jornada
+            String consultaVerificacion = "SELECT hora_salida FROM registro_jornada WHERE id_registro = ?";
+            PreparedStatement stmtVerificacion = con.prepareStatement(consultaVerificacion);
+            stmtVerificacion.setInt(1, objeto.getId_registro());
+            ResultSet rs = stmtVerificacion.executeQuery();
+
+            if (rs.next() && rs.getTime("hora_salida") != null) {
+                // Si ya existe un valor en la columna hora_salida, significa que la salida ya ha sido registrada
+                JOptionPane.showMessageDialog(null, "La salida ya ha sido registrada anteriormente");
+                rs.close();
+                stmtVerificacion.close();
+                return false;
+            }
+
+            rs.close();
+            stmtVerificacion.close();
+
+            // Actualizar el registro de jornada con la hora de salida
             String consulta = "UPDATE registro_jornada SET hora_salida = ? WHERE id_registro = ?";
             PreparedStatement stmt = con.prepareStatement(consulta);
 
@@ -97,9 +114,9 @@ public class Ctrl_RegistroJornada {
 
             if (filasAfectadas > 0) {
                 respuesta = true;
-                System.out.println("salida no registrada ");
+                JOptionPane.showMessageDialog(null, "Salida registrada correctamente");
             } else {
-                System.out.println("Error al registrar la salida");
+                JOptionPane.showMessageDialog(null, "Error al registrar la salida");
             }
 
             stmt.close();

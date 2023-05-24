@@ -1,18 +1,17 @@
-
 package taqueria;
 
 import Controlador.Ctrl_Inventario;
 import Modelo.MInventario;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
+
 public class Inventario extends javax.swing.JInternalFrame {
 
     public Inventario() {
         initComponents();
-        this.setSize(new Dimension(420,300));
+        this.setSize(new Dimension(420, 300));
         this.setTitle("Ingresar Producto");
-        
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -81,34 +80,54 @@ public class Inventario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonGuardarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarPActionPerformed
-        MInventario inventario= new MInventario();
+
+        MInventario inventario = new MInventario();
         Ctrl_Inventario controlInventario = new Ctrl_Inventario();
-        
-        //validar si se ingresan espacios vacios
-        if(txtDescP.getText().isEmpty() || txtCantidad.getText().isEmpty() || txtNombreP2.getText().isEmpty() || txtProveedor.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos ");
-            
-        }else{
-            if(!controlInventario.existeProducto(txtNombreP2.getText().trim())){
-                inventario.setNombre(txtNombreP2.getText().trim() );
-                inventario.setDescripcion(txtDescP.getText().trim() );
-                inventario.setCantidad(Integer.parseInt(txtCantidad.getText().trim()));                
-                inventario.setProovedor(txtProveedor.getText().trim() );
-                if(controlInventario.guardar(inventario)){
-                    JOptionPane.showMessageDialog(null, "Producto guardado");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Error al guardar");
 
+// Validar si se ingresan espacios vacíos
+        if (txtDescP.getText().isEmpty() || txtCantidad.getText().isEmpty() || txtNombreP2.getText().isEmpty() || txtProveedor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+        } else {
+            // Validar límites de caracteres para el nombre (máximo 50 caracteres)
+            if (txtNombreP2.getText().length() > 50) {
+                JOptionPane.showMessageDialog(null, "El nombre excede el límite de caracteres permitidos (50)");
+            } // Validar límites de caracteres para la descripción (máximo 100 caracteres)
+            else if (txtDescP.getText().length() > 100) {
+                JOptionPane.showMessageDialog(null, "La descripción excede el límite de caracteres permitidos (100)");
+            } // Validar límites de cantidad (no puede ser negativa)
+            else if (Integer.parseInt(txtCantidad.getText().trim()) < 0) {
+                JOptionPane.showMessageDialog(null, "La cantidad no puede ser negativa");
+            } // Validar límites de caracteres para el proveedor (máximo 50 caracteres)
+            else if (txtProveedor.getText().length() > 50) {
+                JOptionPane.showMessageDialog(null, "El proveedor excede el límite de caracteres permitidos (50)");
+            } else {
+                // Validar si el producto ya existe en la base de datos
+                String nombre = txtNombreP2.getText().trim();
+                String descripcion = txtDescP.getText().trim();
+                int cantidad = Integer.parseInt(txtCantidad.getText().trim());
+                String proveedor = txtProveedor.getText().trim();
+                if (controlInventario.existeProducto(nombre, descripcion, cantidad, proveedor)) {
+                    JOptionPane.showMessageDialog(null, "Producto existente en la base de datos");
+                } else {
+                    inventario.setNombre(nombre);
+                    inventario.setDescripcion(descripcion);
+                    inventario.setCantidad(cantidad);
+                    inventario.setProovedor(proveedor);
+
+                    if (controlInventario.guardar(inventario)) {
+                        JOptionPane.showMessageDialog(null, "Producto guardado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al guardar");
+                    }
                 }
-            }else{
-                JOptionPane.showMessageDialog(null, "Producto existente en la base de datos");
-
-            }         
+            }
         }
+
         txtNombreP2.setText("");
         txtDescP.setText("");
         txtCantidad.setText("");
         txtProveedor.setText("");
+
     }//GEN-LAST:event_buttonGuardarPActionPerformed
 
 
@@ -125,6 +144,5 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreP2;
     private javax.swing.JTextField txtProveedor;
     // End of variables declaration//GEN-END:variables
-
 
 }
