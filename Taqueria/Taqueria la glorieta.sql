@@ -39,7 +39,6 @@ CREATE TABLE inventario (
   proovedor VARCHAR(50)
 );
 
-
 -- Tabla de sueldos
 CREATE TABLE sueldos (
   id_sueldo INT NOT NULL AUTO_INCREMENT,
@@ -79,21 +78,38 @@ CREATE TABLE empleados (
   PRIMARY KEY (id_empleado)
 );
 
+DELIMITER $
+CREATE TRIGGER actualizarBlancoANinguno
+BEFORE INSERT 
+ON empleados 
+FOR EACH ROW
+BEGIN
+	SET new.direccion_empleado = "Ninguno";
+    SET new.telefono_empleado = "Ninguno";
+END;
+
+select nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, puesto_empleado
+from empleados e
+inner join catalogo_puestos c
+	on e.id_puesto = c.id_puesto;
 
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
 VALUES("diego", "gonzalez", "tijuana", "664", "admin", "123", 5); #5 para admin
+INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
+VALUES("diego", "gonzalez", "tijuana", "664", "mariano", "123", 2); #5 para admin
 select * from empleados;
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("Deysi", "Rufino", "tijuana", "663", "admin", "125", 5);
+VALUES("Deysi", "Rufino", "tijuana", "663", "cajero", "123", 4);
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("Nora", "Ornelas", "tijuana", "663", "admin", "124", 5);
+VALUES("Nora", "Ornelas", "tijuana", "663", "mesero", "123", 3);
 INSERT INTO empleados(nombre_empleado, apellido_empleado, direccion_empleado, telefono_empleado, usuario, password, id_puesto)
-VALUES("Carla", "Perez", "tijuana", "663", "admin", "124", 5);
+VALUES("Carla", "Perez", "tijuana", "663", "admin2", "123", 2);
 CREATE TABLE catalogo_puestos (
 	id_puesto INT NOT NULL AUTO_INCREMENT,
     puesto_empleado VARCHAR(50) NOT NULL,
     PRIMARY KEY(id_puesto)
 );
+
 
 INSERT INTO catalogo_puestos(puesto_empleado)
 VALUES("asador"),("taquero"),("mesero"),("cajero"),("admin");

@@ -283,6 +283,7 @@ public class LoginTaqueria extends javax.swing.JFrame {
             if(controlUsuario.LoginTaqueria(usuario)){
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 OpcionesMenu menu = new OpcionesMenu();
+                menu.usuarioLoggedIn(usuario);
                 menu .setVisible(true);
                 this.dispose();
 

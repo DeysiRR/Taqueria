@@ -13,6 +13,7 @@ public class Usuario {
     private String usuario;
     private String password;
     private String telefono;
+    private String puesto_empleado;
     private int esatado;
 
     public Usuario() {
@@ -22,6 +23,7 @@ public class Usuario {
         this.usuario = "";
         this.password = "";
         this.telefono = "";
+        this.puesto_empleado = "";
         this.esatado = 0;
     }
  // set and get
@@ -80,6 +82,14 @@ public class Usuario {
 
     public void setEsatado(int esatado) {
         this.esatado = esatado;
+    }
+    
+    public String getPuestoEmpleado(){
+        return puesto_empleado;
+    }
+    
+    public void setPuestoEmpleado(String puesto_empleado){
+        this.puesto_empleado = puesto_empleado;
     }
     
 }
