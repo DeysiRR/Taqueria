@@ -132,10 +132,11 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
 
         Ctrl_RegistroJornada controlador = new Ctrl_RegistroJornada();
         boolean resultado = controlador.entrada(registro);
-         if (resultado) {
+        if (resultado) {
             JOptionPane.showMessageDialog(null, "Entrada registrada correctamente");
-            
-            TablaJornada();
+            txtIdEmpleado.setText("");
+            this.TablaJornada();
+            // TablaJornada();
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar la entrada");
         }
@@ -153,7 +154,8 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
         boolean resultado = controlador.salida(registro);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Salida registrada correctamente");
-            TablaJornada();
+            txtIdEmpleado.setText("");
+            this.TablaJornada();
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar la salida");
         }
@@ -162,7 +164,7 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonSalidaActionPerformed
 
     private void txtIdEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmpleadoActionPerformed
-       
+
     }//GEN-LAST:event_txtIdEmpleadoActionPerformed
 
 
@@ -179,7 +181,13 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 private void TablaJornada() {
         Connection con = Conexion.conectar();
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Evitar que las celdas de la tabla sean editables
+                return false;
+            }
+        };
         String sql = "SELECT id_registro, id_empleado, fecha, hora_entrada, hora_salida FROM registro_jornada";
         Statement st;
 
@@ -209,6 +217,10 @@ private void TablaJornada() {
         tablaRJ.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    // Evitar que se realice alguna acción al hacer doble clic en una fila
+                    return;
+                }
                 int fila_point = tablaRJ.rowAtPoint(e.getPoint());
                 int columna_point = 0;
 
