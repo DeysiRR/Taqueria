@@ -67,6 +67,8 @@ CREATE TABLE registro_jornada (
 );
 ALTER TABLE registro_jornada MODIFY COLUMN hora_salida TIME DEFAULT NULL;
 
+select * from registro_jornada;
+
 -- Tabla de empleados
 CREATE TABLE empleados (
   id_empleado INT NOT NULL AUTO_INCREMENT,

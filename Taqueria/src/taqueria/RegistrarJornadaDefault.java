@@ -54,7 +54,7 @@ public class RegistrarJornadaDefault extends javax.swing.JInternalFrame {
                 buttonSalidaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 100, -1));
+        jPanel1.add(buttonSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 100, -1));
 
         buttonEntrada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Entrada.png"))); // NOI18N
@@ -64,17 +64,17 @@ public class RegistrarJornadaDefault extends javax.swing.JInternalFrame {
                 buttonEntradaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, -1));
+        jPanel1.add(buttonEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cliente.png"))); // NOI18N
         jLabel2.setText("Bienvenido!");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/historial1.png"))); // NOI18N
         jLabel3.setText("Registro de jornada laboral");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
