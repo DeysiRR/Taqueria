@@ -188,8 +188,14 @@ private void TablaJornada() {
                 return false;
             }
         };
-        String sql = "SELECT id_registro, id_empleado, fecha, hora_entrada, hora_salida FROM registro_jornada";
+        String sql = "SELECT id_registro, registro_jornada.id_empleado, e.usuario, fecha, hora_entrada, hora_salida FROM registro_jornada "
+                     + " INNER JOIN empleados e ON e.id_empleado = registro_jornada.id_empleado;"; 
         Statement st;
+        /*
+        SELECT id_registro, registro_jornada.id_empleado, e.nombre_empleado, fecha, hora_entrada, hora_salida FROM registro_jornada
+        INNER JOIN empleados e
+        on e.id_empleado = registro_jornada.id_empleado;
+        */
 
         try {
             st = con.createStatement();
@@ -198,6 +204,7 @@ private void TablaJornada() {
 
             model.addColumn("Id_registro");
             model.addColumn("Id_empleado");
+            model.addColumn("Usuario");
             model.addColumn("Fecha");
             model.addColumn("Hora_entrada");
             model.addColumn("Hora_salida");
@@ -222,7 +229,7 @@ private void TablaJornada() {
                     return;
                 }
                 int fila_point = tablaRJ.rowAtPoint(e.getPoint());
-                int columna_point = 0;
+                int columna_point = 2; //columna de usuario
 
                 if (fila_point > -1) {
                     id_registros = (int) model.getValueAt(fila_point, columna_point);

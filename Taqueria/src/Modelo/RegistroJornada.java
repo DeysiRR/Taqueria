@@ -13,6 +13,7 @@ import java.sql.Time;
 public class RegistroJornada {
     private int id_registro;
     private int id_empleado;
+    private String usuario;
     private LocalDate fecha;
     private Time hora_entrada;
     private Time hora_salida;
@@ -20,6 +21,7 @@ public class RegistroJornada {
     public RegistroJornada() {
         this.id_registro = 0;
         this.id_empleado = 0;
+        this.usuario = "";
         this.fecha = LocalDate.now(); // Asignar la fecha actual
         this.hora_entrada = null; 
         this.hora_salida = null; 
@@ -71,5 +73,13 @@ public class RegistroJornada {
 
     public void setHora_salida(Time hora_salida) {
         this.hora_salida = hora_salida;
+    }
+    
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
+    }
+    
+    public String getUsuario(){
+        return usuario;
     }
 }
