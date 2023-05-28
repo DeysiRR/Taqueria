@@ -124,7 +124,7 @@ public class Sueldos extends javax.swing.JInternalFrame {
         int indexPuesto = this.cbbPuesto.getSelectedIndex() + 1;
         int nSueldo = Integer.parseInt(this.txfNSueldo.getText());
         Connection con = Conexion.conectar();
-        String sql = "UPDATE sueldos SET monto_sueldo = " + nSueldo + " WHERE id_puesto = " + indexPuesto + ";";
+        String sql = "UPDATE sueldos SET monto_sueldo = " + nSueldo + ", fecha_pago = CURDATE() WHERE id_puesto = " + indexPuesto + ";";
         Statement st;
         //DefaultTableModel model = new DefaultTableModel();
         try {
@@ -147,12 +147,8 @@ public class Sueldos extends javax.swing.JInternalFrame {
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
         //String sql = "SELECT id_puesto, monto_sueldo, fecha_pago FROM sueldos";
-        String sql = """
-                     SELECT p.puesto_empleado AS Puesto, s.fecha_pago AS Proximo_Pago, s.monto_sueldo AS Monto
-                      FROM sueldos s
-                     \tINNER JOIN catalogo_puestos p
-                     \tON p.id_puesto=s.id_puesto
-                     ORDER BY p.id_puesto; """;
+        String sql = "SELECT p.puesto_empleado AS Puesto, s.fecha_pago AS Proximo_Pago, s.monto_sueldo AS Monto FROM sueldos s INNER JOIN catalogo_puestos p "
+                    + "ON p.id_puesto=s.id_puesto ORDER BY p.id_puesto;";
         Statement st;
 
         try {

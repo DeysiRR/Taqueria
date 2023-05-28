@@ -45,6 +45,9 @@ SELECT id_registro, registro_jornada.id_empleado, concat(e.nombre_empleado, " ",
 INNER JOIN empleados e
 on e.id_empleado = registro_jornada.id_empleado;
 
+UPDATE sueldos SET fecha_pago = CURDATE(), monto_sueldo = 1000 WHERE id_puesto = 1;
+select * from sueldos;
+
 -- Tabla de registro de jornada
 CREATE TABLE registro_jornada (
   id_registro INT NOT NULL AUTO_INCREMENT,
