@@ -111,7 +111,6 @@ public class Ctrl_RegistroJornada {
 
             if (filasAfectadas > 0) {
                 respuesta = true;
-                JOptionPane.showMessageDialog(null, "Salida registrada correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al registrar la salida");
             }

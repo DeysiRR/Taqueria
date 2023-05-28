@@ -126,23 +126,7 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntradaActionPerformed
-        //int idEmpleado = Integer.parseInt(txtIdEmpleado.getText());
-        /*
-        RegistroJornada registro = new RegistroJornada();
-        registro.setId_empleado(idEmpleado);
-        registro.setHora_entrada(new Time(System.currentTimeMillis()));
 
-        Ctrl_RegistroJornada controlador = new Ctrl_RegistroJornada();
-        boolean resultado = controlador.entrada(registro);
-        if (resultado) {
-            JOptionPane.showMessageDialog(null, "Entrada registrada correctamente");
-            txtIdEmpleado.setText("");
-            this.TablaJornada();
-            // TablaJornada();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al registrar la entrada");
-        }
-        */
         RegistroJornada registro = new RegistroJornada();
         registro.setUsuario(empleadosBox.getSelectedItem().toString());
         registro.setHora_entrada(new Time(System.currentTimeMillis()));
@@ -180,7 +164,21 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al registrar la salida");
         }
         */
-
+        RegistroJornada registro = new RegistroJornada();
+        registro.setUsuario(empleadosBox.getSelectedItem().toString());
+        //registro.setHora_entrada(new Time(System.currentTimeMillis()));
+        registro.setHora_salida(new Time(System.currentTimeMillis()));
+        registro.setId_registro(id_registros);
+        
+        Ctrl_RegistroJornada controlador = new Ctrl_RegistroJornada();
+        registro.setId_empleado(controlador.getIDEmpleado(registro));
+        boolean respuesta = controlador.salida(registro);
+        if(respuesta){
+            JOptionPane.showMessageDialog(null, "Salida registrada correctamente");
+            this.TablaJornada();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar la salida");
+        }
     }//GEN-LAST:event_buttonSalidaActionPerformed
 
     private void empleadosBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosBoxActionPerformed
@@ -252,7 +250,8 @@ private void TablaJornada() {
                 int columna_point = 2; //columna de usuario
 
                 if (fila_point > -1) {
-                    //id_registros = (int) model.getValueAt(fila_point, columna_point);
+                    id_registros = (int) model.getValueAt(fila_point, 0);
+                    //System.out.println("id:" + id_registros);
                     //TransferirDatosJornada(id_registros);
                 }
             }
