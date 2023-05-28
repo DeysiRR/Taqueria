@@ -51,9 +51,9 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
         buttonSalida = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaRJ = new javax.swing.JTable();
-        txtIdEmpleado = new javax.swing.JTextField();
         buttonEntrada = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        empleadosBox = new javax.swing.JComboBox<>();
 
         setIconifiable(true);
         setResizable(true);
@@ -97,13 +97,6 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 550, 190));
 
-        txtIdEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdEmpleadoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtIdEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 161, 30));
-
         buttonEntrada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Entrada.png"))); // NOI18N
         buttonEntrada.setText("Entrada");
@@ -119,13 +112,22 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
         jLabel2.setText("Id_empleado ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
+        empleadosBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        empleadosBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empleadosBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(empleadosBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 130, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntradaActionPerformed
-        int idEmpleado = Integer.parseInt(txtIdEmpleado.getText());
+        //int idEmpleado = Integer.parseInt(txtIdEmpleado.getText());
+        /*
         RegistroJornada registro = new RegistroJornada();
         registro.setId_empleado(idEmpleado);
         registro.setHora_entrada(new Time(System.currentTimeMillis()));
@@ -140,11 +142,29 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar la entrada");
         }
-
+        */
+        RegistroJornada registro = new RegistroJornada();
+        registro.setUsuario(empleadosBox.getSelectedItem().toString());
+        registro.setHora_entrada(new Time(System.currentTimeMillis()));
+        
+        Ctrl_RegistroJornada controlador = new Ctrl_RegistroJornada();
+        registro.setId_empleado(controlador.getIDEmpleado(registro));
+        
+        boolean resultado = false;
+        try{
+            resultado = controlador.entrada(registro);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        if(resultado){
+            JOptionPane.showMessageDialog(null, "Entrada registrada correctamente");
+            this.TablaJornada();
+        }
     }//GEN-LAST:event_buttonEntradaActionPerformed
 
     private void buttonSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalidaActionPerformed
-        int idEmpleado = Integer.parseInt(txtIdEmpleado.getText());
+        //int idEmpleado = Integer.parseInt(txtIdEmpleado.getText());
+        /*
         RegistroJornada registro = new RegistroJornada();
         registro.setId_registro(id_registros);
         registro.setId_empleado(idEmpleado);
@@ -159,27 +179,28 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar la salida");
         }
-
+        */
 
     }//GEN-LAST:event_buttonSalidaActionPerformed
 
-    private void txtIdEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmpleadoActionPerformed
-
-    }//GEN-LAST:event_txtIdEmpleadoActionPerformed
+    private void empleadosBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_empleadosBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEntrada;
     private javax.swing.JButton buttonSalida;
+    private javax.swing.JComboBox<String> empleadosBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tablaRJ;
-    private javax.swing.JTextField txtIdEmpleado;
     // End of variables declaration//GEN-END:variables
 private void TablaJornada() {
+        this.TransferirDatosJornada();
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -188,7 +209,7 @@ private void TablaJornada() {
                 return false;
             }
         };
-        String sql = "SELECT id_registro, registro_jornada.id_empleado, e.usuario, fecha, hora_entrada, hora_salida FROM registro_jornada "
+        String sql = "SELECT id_registro, e.usuario, fecha, hora_entrada, hora_salida FROM registro_jornada "
                      + " INNER JOIN empleados e ON e.id_empleado = registro_jornada.id_empleado;"; 
         Statement st;
         /*
@@ -203,7 +224,6 @@ private void TablaJornada() {
             tablaRJ.setModel(model);
 
             model.addColumn("Id_registro");
-            model.addColumn("Id_empleado");
             model.addColumn("Usuario");
             model.addColumn("Fecha");
             model.addColumn("Hora_entrada");
@@ -232,14 +252,15 @@ private void TablaJornada() {
                 int columna_point = 2; //columna de usuario
 
                 if (fila_point > -1) {
-                    id_registros = (int) model.getValueAt(fila_point, columna_point);
-                    TransferirDatosJornada(id_registros);
+                    //id_registros = (int) model.getValueAt(fila_point, columna_point);
+                    //TransferirDatosJornada(id_registros);
                 }
             }
         });
     }
 
-    private void TransferirDatosJornada(int id_Producto) {
+    private void TransferirDatosJornada() {
+        /*
         try {
             Connection con = Conexion.conectar();
             PreparedStatement pst = con.prepareStatement("SELECT id_empleado, fecha, hora_entrada, hora_salida FROM registro_jornada WHERE id_registro = ?");
@@ -250,7 +271,24 @@ private void TablaJornada() {
             }
             con.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al seleccionar producto: ");
+            JOptionPane.showMessageDialog(null, "Error al seleccionar empleado.");
+        }
+        */
+        empleadosBox.removeAllItems();
+        Connection cn = Conexion.conectar();
+        //String sql = "select usuario,password from usuarios where usuario= '"+ objeto.getUsuario() + "' and password = '"+ objeto.getPassword()+ "'";
+        String sql = "select usuario from empleados;"; 
+        Statement st;
+        ResultSet rs;
+        try{
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                empleadosBox.addItem(rs.getString(1));
+            }
+        }catch(SQLException e){
+            System.out.println("Error al conectarse al sistema..." + e);
+            JOptionPane.showMessageDialog(null, "Error al conectarse al sistema...");
         }
     }
 }

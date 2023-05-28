@@ -48,6 +48,12 @@ on e.id_empleado = registro_jornada.id_empleado;
 UPDATE sueldos SET fecha_pago = CURDATE(), monto_sueldo = 1000 WHERE id_puesto = 1;
 select * from sueldos;
 
+
+SELECT COUNT(*) FROM registro_jornada r
+INNER JOIN empleados e
+ON r.id_empleado = e.id_empleado
+WHERE usuario = "admin" AND fecha = "2023-05-02";
+
 -- Tabla de registro de jornada
 CREATE TABLE registro_jornada (
   id_registro INT NOT NULL AUTO_INCREMENT,
@@ -57,7 +63,11 @@ CREATE TABLE registro_jornada (
   hora_salida TIME NOT NULL,
   PRIMARY KEY (id_registro),
   FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
+  ON UPDATE CASCADE ON DELETE CASCADE
 );
+ALTER TABLE registro_jornada MODIFY COLUMN hora_salida TIME DEFAULT NULL;
+
+
 select * from registro_jornada;
 
 -- Tabla de empleados
@@ -146,4 +156,3 @@ CREATE TABLE recetas_insumos (
   FOREIGN KEY (id_insumo) REFERENCES insumos (id_insumo)
 );
 
-ALTER TABLE registro_jornada MODIFY COLUMN hora_salida TIME DEFAULT NULL;

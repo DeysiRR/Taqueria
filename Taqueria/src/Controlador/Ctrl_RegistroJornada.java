@@ -19,65 +19,62 @@ import javax.swing.JOptionPane;
  */
 public class Ctrl_RegistroJornada {
 
-    public boolean entrada(RegistroJornada objeto) {
+    public boolean entrada(RegistroJornada objeto) throws SQLException {
         boolean respuesta = false;
         Connection con = Conexion.conectar();
-
-        try {
-            // Verificar si el id_empleado existe
-            String consultaVerificacion = "SELECT COUNT(*) FROM empleados WHERE id_empleado = ?";
-            PreparedStatement stmtVerificacion = con.prepareStatement(consultaVerificacion);
-            stmtVerificacion.setInt(1, objeto.getId_empleado());
+        
+        // Verificar si el id_empleado existe
+        String consultaVerificacion = "SELECT COUNT(*) FROM empleados WHERE usuario = ?";
+        int count = 0;
+        try (PreparedStatement stmtVerificacion = con.prepareStatement(consultaVerificacion)) {
+            stmtVerificacion.setString(1, objeto.getUsuario());
             ResultSet rs = stmtVerificacion.executeQuery();
             rs.next();
-            int count = rs.getInt(1);
+            count = rs.getInt(1);
             rs.close();
-            stmtVerificacion.close();
-
-            if (count == 0) {
-                JOptionPane.showMessageDialog(null, "El id_empleado no existe");
-                return false;
-            }
-
-            // Verificar si ya existe un registro de entrada para el empleado en la fecha actual
-            String consultaExistencia = "SELECT COUNT(*) FROM registro_jornada WHERE id_empleado = ? AND fecha = ?";
-            PreparedStatement stmtExistencia = con.prepareStatement(consultaExistencia);
-            stmtExistencia.setInt(1, objeto.getId_empleado());
-            stmtExistencia.setDate(2, java.sql.Date.valueOf(objeto.getFecha()));
-            ResultSet rsExistencia = stmtExistencia.executeQuery();
-            rsExistencia.next();
-            int countExistencia = rsExistencia.getInt(1);
-            rsExistencia.close();
-            stmtExistencia.close();
-
-            if (countExistencia > 0) {
-                JOptionPane.showMessageDialog(null, "Ya se ha registrado una entrada para este empleado en la fecha actual");
-                return false;
-            }
-
-            // Insertar el registro de entrada
-            String consulta = "INSERT INTO registro_jornada (id_empleado, fecha, hora_entrada) VALUES (?, ?, ?)";
-            PreparedStatement stmt = con.prepareStatement(consulta);
-            stmt.setInt(1, objeto.getId_empleado());
-            stmt.setDate(2, java.sql.Date.valueOf(objeto.getFecha()));
-            stmt.setTime(3, objeto.getHora_entrada());
-
-            int filasAfectadas = stmt.executeUpdate();
-
-            if (filasAfectadas > 0) {
-                respuesta = true;
-                System.out.println("Entrada no registrada ");
-            } else {
-                System.out.println("Error al registrar la entrada");
-            }
-
-            stmt.close();
-            con.close();
-        } catch (SQLException e) {
+        }catch(Exception e){
             e.printStackTrace();
-            System.out.println("Error al ejecutar la consulta: " + e.getMessage());
+        }
+        if (count == 0) {
+            JOptionPane.showMessageDialog(null, "El id_empleado no existe");
+            return false;
         }
 
+        // Verificar si ya existe un registro de entrada para el empleado en la fecha actual
+        String consultaExistencia = "SELECT COUNT(*) FROM registro_jornada WHERE id_empleado = ? AND fecha = ?";
+        PreparedStatement stmtExistencia = con.prepareStatement(consultaExistencia);
+        stmtExistencia.setInt(1, objeto.getId_empleado());
+        stmtExistencia.setDate(2, java.sql.Date.valueOf(objeto.getFecha()));
+        ResultSet rsExistencia = stmtExistencia.executeQuery();
+        rsExistencia.next();
+        int countExistencia = rsExistencia.getInt(1);
+        rsExistencia.close();
+        stmtExistencia.close();
+
+        if (countExistencia > 0) {
+            JOptionPane.showMessageDialog(null, "Ya se ha registrado una entrada para este empleado en la fecha actual");
+            return false;
+        }
+        
+        
+        String consulta = "INSERT INTO registro_jornada (id_empleado, fecha, hora_entrada) VALUES (?, ?, ?)";
+        PreparedStatement stmt = con.prepareStatement(consulta);
+        System.out.println(objeto.getId_empleado());
+        stmt.setInt(1, objeto.getId_empleado());
+        stmt.setDate(2, java.sql.Date.valueOf(objeto.getFecha()));
+        stmt.setTime(3, objeto.getHora_entrada());
+
+        int filasAfectadas = stmt.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            respuesta = true;
+            System.out.println("Entrada no registrada ");
+        } else {
+            System.out.println("Error al registrar la entrada");
+        }
+
+        stmt.close();
+        con.close();
         return respuesta;
     }
 
@@ -128,4 +125,23 @@ public class Ctrl_RegistroJornada {
         return respuesta;
     }
 
+    public int getIDEmpleado(RegistroJornada empleado){
+        int id = 0;
+        Connection con = Conexion.conectar();
+        String sql = "SELECT id_empleado FROM empleados WHERE usuario = '" + empleado.getUsuario() + "';";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                String resultado = rs.getString(1);
+                id = Integer.parseInt(resultado);
+            }
+        }catch(SQLException e){
+            e.getStackTrace();
+        }
+        return id;
+    }
+    
 }
