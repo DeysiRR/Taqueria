@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 public class RegistrarJornada extends javax.swing.JInternalFrame {
 
     int id_registros;
+    int extender_fila = 5;
 
     public RegistrarJornada() {
         initComponents();
@@ -153,7 +154,7 @@ public class RegistrarJornada extends javax.swing.JInternalFrame {
         registro.setId_registro(id_registros);
         registro.setId_empleado(idEmpleado);
         registro.setHora_salida(new Time(System.currentTimeMillis()));
-
+*
         Ctrl_RegistroJornada controlador = new Ctrl_RegistroJornada();
         boolean resultado = controlador.salida(registro);
         if (resultado) {
@@ -228,15 +229,16 @@ private void TablaJornada() {
             model.addColumn("Hora_salida");
 
             while (rs.next()) {
+                //tablaRJ.getRowCount() +;
                 Object[] fila = new Object[5];
                 for (int i = 0; i < 5; i++) {
-                    fila[i] = rs.getObject(i + 1);
+                    fila[i] = rs.getObject(i+1);
                 }
                 model.addRow(fila);
             }
             con.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al llenar la tabla de productos: ");
+            JOptionPane.showMessageDialog(null, "Error al llenar la tabla de registrar jornadas.");
         }
 
         tablaRJ.addMouseListener(new MouseAdapter() {
@@ -251,7 +253,7 @@ private void TablaJornada() {
 
                 if (fila_point > -1) {
                     id_registros = (int) model.getValueAt(fila_point, 0);
-                    //System.out.println("id:" + id_registros);
+                    System.out.println("id:" + id_registros);
                     //TransferirDatosJornada(id_registros);
                 }
             }
