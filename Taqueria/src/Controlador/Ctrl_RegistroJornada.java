@@ -77,7 +77,7 @@ public class Ctrl_RegistroJornada {
         con.close();
         return respuesta;
     }
-
+    
     public boolean salida(RegistroJornada objeto) {
         boolean respuesta = false;
         Connection con = Conexion.conectar();
@@ -143,4 +143,23 @@ public class Ctrl_RegistroJornada {
         return id;
     }
     
+    public int getIDRegistro(RegistroJornada empleado)
+    {
+        int id = 0;
+        Connection con = Conexion.conectar();
+        String sql = "SELECT id_registro FROM registro_jornada WHERE id_empleado = '" + empleado.getId_empleado() + "';";
+        Statement st;
+        ResultSet rs;
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+            while(rs.next()){
+                String resultado = rs.getString(1);
+                id = Integer.parseInt(resultado);
+            }
+        }catch(SQLException e){
+            e.getStackTrace();
+        }
+        return id;
+    }
 }

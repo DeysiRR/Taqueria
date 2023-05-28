@@ -300,11 +300,18 @@ public class OpcionesMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCerrarSesiionActionPerformed
 
     private void menuREntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuREntradaActionPerformed
-       RegistrarJornada rj=new RegistrarJornada();
-       jDesktopPane_menu.add(rj);
-       rj.setVisible(true);
-       rj.moveToFront();
-       
+       if(!usuarioLoggedIn.getPuestoEmpleado().equals("admin")){
+           RegistrarJornadaDefault rj = new RegistrarJornadaDefault();
+           rj.setUsuarioLoggedIn(usuarioLoggedIn);
+           jDesktopPane_menu.add(rj);
+           rj.setVisible(true);
+           rj.moveToFront();
+       }else{
+           RegistrarJornada rj=new RegistrarJornada();
+           jDesktopPane_menu.add(rj);
+           rj.setVisible(true);
+           rj.moveToFront();
+       }
     }//GEN-LAST:event_menuREntradaActionPerformed
 
     private void menuSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSueldoActionPerformed

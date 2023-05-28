@@ -67,9 +67,6 @@ CREATE TABLE registro_jornada (
 );
 ALTER TABLE registro_jornada MODIFY COLUMN hora_salida TIME DEFAULT NULL;
 
-
-select * from registro_jornada;
-
 -- Tabla de empleados
 CREATE TABLE empleados (
   id_empleado INT NOT NULL AUTO_INCREMENT,
@@ -132,27 +129,4 @@ select usuario, password from usuarios
 where usuario="Admin" and password="12345";
 
 select * from empleados;
-
-CREATE TABLE insumos (
-  id_insumo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  cantidad INT NOT NULL,
-  unidad_medida VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE recetas (
-  id_receta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  descripcion VARCHAR(100),
-  precio int NOT NULL
-);
-
-CREATE TABLE recetas_insumos (
-  id_receta INT NOT NULL,
-  id_insumo INT NOT NULL,
-  cantidad_requerida INT NOT NULL,
-  PRIMARY KEY (id_receta, id_insumo),
-  FOREIGN KEY (id_receta) REFERENCES recetas (id_receta),
-  FOREIGN KEY (id_insumo) REFERENCES insumos (id_insumo)
-);
 
