@@ -150,6 +150,11 @@ public class OpcionesMenu extends javax.swing.JFrame {
         menuSueldo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/sueldo.png"))); // NOI18N
         menuSueldo.setText("Sueldo");
         menuSueldo.setPreferredSize(new java.awt.Dimension(210, 50));
+        menuSueldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSueldoActionPerformed(evt);
+            }
+        });
         menuSueldos.add(menuSueldo);
 
         menu.add(menuSueldos);
@@ -301,6 +306,14 @@ public class OpcionesMenu extends javax.swing.JFrame {
        rj.moveToFront();
        
     }//GEN-LAST:event_menuREntradaActionPerformed
+
+    private void menuSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSueldoActionPerformed
+        // TODO add your handling code here:
+        Sueldos sueldos = new Sueldos();
+        jDesktopPane_menu.add(sueldos);
+        sueldos.setVisible(true);
+        sueldos.moveToFront();
+    }//GEN-LAST:event_menuSueldoActionPerformed
 
     public void usuarioLoggedIn(Usuario usuario){
         usuarioLoggedIn = usuario;

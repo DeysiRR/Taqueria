@@ -16,10 +16,10 @@ import java.sql.ResultSet;
     public boolean LoginTaqueria(Usuario objeto) {
         boolean respuesta = false;
 
-        Connection cn = Conexion.conectar;
+        Connection cn = Conexion.conectar();
         String sql = "SELECT usuario, password FROM empleados WHERE BINARY usuario = ? AND BINARY password = ?";
         PreparedStatement stmt;
-        main
+
         try {
             stmt = (PreparedStatement) cn.prepareStatement(sql);
             stmt.setString(1, objeto.getUsuario());

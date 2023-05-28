@@ -1,14 +1,4 @@
 use taqueria_la_glorieta;
-#USUARIOS
-CREATE TABLE Usuarios(
-id_usuario int(11) auto_increment primary key,
-nombre varchar(30) not null,
-apellido varchar(30) not null,
-usuario varchar(15) not null,
-password varchar(15) not null,
-telefono varchar(10) not null,
-estado int (1) not null 
-);
 
 -- Tabla de ventas
 CREATE TABLE ventas (
@@ -42,13 +32,18 @@ CREATE TABLE inventario (
 -- Tabla de sueldos
 CREATE TABLE sueldos (
   id_sueldo INT NOT NULL AUTO_INCREMENT,
-  id_empleado INT NOT NULL,
+  id_puesto INT NOT NULL,
   fecha_pago DATE NOT NULL,
-  monto_sueldo DECIMAL(10,2) NOT NULL,
+  monto_sueldo DECIMAL NOT NULL,
   PRIMARY KEY (id_sueldo),
-  FOREIGN KEY (id_empleado) 
-  REFERENCES empleados(id_empleado)
+  FOREIGN KEY (id_puesto) 
+  REFERENCES catalogo_puestos(id_puesto)
 );
+insert into sueldos(id_puesto, fecha_pago, monto_sueldo) values
+(1, "2023-05-30", 1500), (2, "2023-05-30", 1600), (3, "2023-05-30", 1300), (4, "2023-05-30", 1200), (5, "2023-05-30", 2000);
+SELECT id_registro, registro_jornada.id_empleado, concat(e.nombre_empleado, " ", e.apellido_empleado), fecha, hora_entrada, hora_salida FROM registro_jornada
+INNER JOIN empleados e
+on e.id_empleado = registro_jornada.id_empleado;
 
 -- Tabla de registro de jornada
 CREATE TABLE registro_jornada (
@@ -61,7 +56,7 @@ CREATE TABLE registro_jornada (
   FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
 );
 select * from registro_jornada;
-DELETE FROM registro_jornada;
+
 -- Tabla de empleados
 CREATE TABLE empleados (
   id_empleado INT NOT NULL AUTO_INCREMENT,
